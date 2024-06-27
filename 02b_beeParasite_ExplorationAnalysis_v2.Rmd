@@ -1,0 +1,1140 @@
+---
+title: "02b_beeParasite_ExploratoryAnalysis"
+author: "Jessie Dodge"
+date: "2024-05-24"
+output:
+  word_document: default
+  pdf_document: 
+    latex_engine: xelatex
+    keep_tex: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = TRUE) 
+```
+
+# Library
+```{r, include = FALSE}
+source(file="01i_beeReproDev_MasterData.R")
+```
+
+# Data org
+```{r}
+# re org and select columns you want to keep
+data2<-data[,c(2:4, 15:43, 47:50, 54, 64:65, 68:76)]
+# Count/proportion data 
+colSums(data2[,c(5:20, 43:48)] > 0) # Crops are only in 3 sites, and Barren are only in 2 sites
+data2<-data2[,-c(43,45)] # omit crops and barren
+
+# omit site with no provisioned cells - zeros omitted (zo)
+zo.data<-filter(data2, nTotProvised > 0)
+
+# Data subsets
+# for count/weight data
+## all
+or.data <- filter(zo.data, oligRatio > 0)
+w.data <- filter(zo.data, avgOligMass_mg > 0)
+fw.data <- filter(zo.data, avgOligFMass_mg > 0)
+mw.data <- filter(zo.data, avgOligMMass_mg > 0)
+lw.data <- filter(zo.data, avgOligLarvMass_mg > 0)
+
+# remove T. stan outlier
+zo.data.or <- filter(zo.data, nTstanCells < 10)
+fw.data.or <- filter(zo.data.or, avgOligFMass_mg > 0)
+fw.data.or2 <- filter(zo.data.or, avgOligFMass_mg > 0 & Year == 2021)
+mw.data.or <- filter(zo.data.or, avgOligMMass_mg > 0)
+lw.data.or <- filter(zo.data.or, avgOligLarvMass_mg > 0)
+#or.data.or <- filter(or.data, nTstanCells < 10)
+```
+
+# Questions
+Q1) How does landscape and climate variation affect bee parasitism?
+  * Proposed analyses: MLRs 
+    ** Parasite abundance ~ Year + Hab + Landscape + Climate + Floral
+      ** What variables to include?
+        ** Predictor vars to include in stp-wise model: https://journals.lww.com/picp/fulltext/2017/08030/Common_pitfalls_in_statistical_analysis__Logistic.9.aspx
+          1) what vars have a sig, univariate relationship (P < 0.1)
+          2) Avoid highly correlated variables
+
+Q2) How does parasitism abundance affect bee fitness traits?
+  * Proposed analyses: SLRs 
+    ** bee % ~ parasite %
+    ** bee abundance ~ parasite abundance
+    ** bee mass ~ parasite abundance (2021)
+    ** F% ~ parasite abundance (2021)
+
+# General 
+For significantly different variables between years
+## Field days between years
+```{r}
+zo.data %>% group_by(Year) %>% 
+  summarise_at(c("DD_accumulated"), 
+               list(mean = ~mean(.), se = ~ sd(.)/sqrt(length(.))), na.rm = TRUE)
+```
+
+## Sites with 0 provisions or bee broods
+```{r}
+data %>% group_by(Year) %>% tally(nTotProvised == 0) # 1 in 2020, 6 in 2021
+data %>% group_by(Year) %>% tally(nOligGrowth == 0) # 1 in 2020, 7 in 2021
+```
+
+## T.stan nest colonization %
+```{r}
+data %>% group_by(Year) %>% 
+  summarise_at(c("nTstanCells", "nTotProvised"), sum) %>%
+  mutate(rel.freq = paste0(round(100* ((nTstanCells) /(nTotProvised)), 2), "%"))
+
+## By hab
+data %>% group_by(Habitat) %>%
+ summarise_at(c("nTstanCells", "nTotProvised"), sum)%>%
+mutate(rel.freq = paste0(round(100* ((nTstanCells) /(nTotProvised)), 2), "%"))
+```
+
+# Predictor vars to include in MLR
+## 1) Sig univariate relationships
+### *Note* Need to update data sets
+### Provisioned cells
+Note: you will want to use all data, zeros included for Provisioned cells analysis - true zeros
+#### Data prep
+```{r}
+pvars <- data2[,c(2:4, 21:46)]
+x = colnames(pvars) # make list of response vars names
+
+tpcdata <- data2[,c(5, 2:4, 21:46)]
+
+tpc.out <- unlist(lapply(1, function(n) combn(x, 1, FUN=function(row) paste0("nTotProvised ~ ", paste0(row, collapse = "+")))))
+tpc.out
+```
+
+#### Data exploration
+```{r}
+summary(tpcdata)
+ggplot(tpcdata, aes(nTotProvised, fill = Habitat)) + geom_histogram(binwidth = 5) + facet_grid(Habitat ~ 
+    ., margins = TRUE) # not really normally distributed
+
+ggplot(tpcdata, aes(nTotProvised, fill = Year)) + geom_histogram(binwidth = 5) + facet_grid(Year ~ 
+    ., margins = TRUE) # somewhat Gamma distributed
+
+with(tpcdata, tapply(nTotProvised, Habitat, function(x) {
+    sprintf("M (SD) = %1.2f (%1.2f)", mean(x), sd(x))
+})) # Variance is higher than mean in Burned sites
+
+with(tpcdata, tapply(nTotProvised, Year, function(x) {
+    sprintf("M (SD) = %1.2f (%1.2f)", mean(x), sd(x))
+})) # Variance lower than mean - not much difference in means
+```
+Analysis methods you might consider
+https://stats.oarc.ucla.edu/r/dae/negative-binomial-regression/
+Below is a list of some analysis methods you may have encountered. Some of the methods listed are quite reasonable, while others have either fallen out of favor or have limitations.
+
+* Negative binomial regression - Negative binomial regression can be used for over-dispersed count data, that is when the conditional variance exceeds the conditional mean. It can be considered as a generalization of Poisson regression since it has the same mean structure as Poisson regression and it has an extra parameter to model the over-dispersion. If the conditional distribution of the outcome variable is over-dispersed, the confidence intervals for the Negative binomial regression are likely to be wider as compared to those from a Poisson regression model.
+
+* Poisson regression – Poisson regression is often used for modeling count data. Poisson regression has a number of extensions useful for count models.
+
+* Zero-inflated regression model – Zero-inflated models attempt to account for excess zeros. In other words, two kinds of zeros are thought to exist in the data, “true zeros” and “excess zeros”. Zero-inflated models estimate two equations simultaneously, one for the count model and one for the excess zeros.
+
+* OLS regression – Count outcome variables are sometimes log-transformed and analyzed using OLS regression. Many issues arise with this approach, including loss of data due to undefined values generated by taking the log of zero (which is undefined), as well as the lack of capacity to model the dispersion.
+
+#### SLR
+nTotProvised were not normal unless sqrt
+```{r}
+#To have the regression coefficients
+tpc.mods = bind_rows(lapply(tpc.out, function(frml) {
+  a = tidy(lm(frml, data=tpcdata))
+  a$frml = frml
+  return(a)
+}))
+
+head(tpc.mods)
+
+# check modes
+tpc.mod.chk = bind_rows(lapply(tpc.out, function(frml) {
+  b = plot(lm(frml, data=tpcdata))
+  b$frml= frml
+  return(b)
+}))
+
+write.csv(tpc.mods, "tables/provisionedCells.lm.coeffs.csv")
+```
+Not normal - Transformation vs GLM. Provisioned cells are count data that follow a Poisson dist.
+
+#### GLM - Poisson
+```{r}
+#To have the regression coefficients
+tpc.mods = bind_rows(lapply(tpc.out, function(frml) {
+  a = tidy(glm(frml, data=tpcdata, family = poisson()))
+  a$frml = frml
+  return(a)
+}))
+
+head(tpc.mods)
+write.csv(tpc.mods, "tables/provisionedCells.glm.pois.coeffs.csv")
+
+# to get model results
+tpc.mods2 = bind_rows(lapply(tpc.out, function(frml) {
+ a = glance(glm(frml, data=tpcdata, family = poisson()))
+ a$frml = frml
+ return(a)
+}))
+
+head(tpc.mods2)
+write.csv(tpc.mods2, "tables/provisionedCells.glm.pois.results.csv")
+```
+
+#### GLM - Quasipoisson
+```{r}
+#To have the regression coefficients
+tpc.mods = bind_rows(lapply(tpc.out, function(frml) {
+  a = tidy(glm(frml, data=tpcdata, family = quasipoisson()))
+  a$frml = frml
+  return(a)
+}))
+
+head(tpc.mods)
+write.csv(tpc.mods, "tables/provisionedCells.glm.qp.coeffs.csv")
+```
+
+#### GLM - Negative Binomial
+```{r}
+#To have the regression coefficients
+tpc.mods = bind_rows(lapply(tpc.out, function(frml) {
+  a = tidy(glm.nb(frml, data=tpcdata))
+  a$frml = frml
+  return(a)
+}))
+
+head(tpc.mods)
+write.csv(tpc.mods, "tables/provisionedCells.glm.nb.coeffs.csv")
+
+# to get model results
+#tpc.mods2 = bind_rows(lapply(tpc.out, function(frml) {
+ #a = glance(glm.nb(frml, data=tpcdata))
+ #a$frml = frml
+ #return(a)
+#})) # Won't work: Some attributes are incompatible.
+
+head(tpc.mods2)
+write.csv(tpc.mods2, "tables/provisionedCells.glm.nb.results.csv")
+
+tpcm1<-glm.nb(nTotProvised ~ Ann_ppt_mm, data = tpcdata)
+glance(tpcm1)
+```
+
+#### *Nested GLM - Gaussian*
+```{r}
+tpcdata <- zo.data[,c(5, 2:4, 21:48)]
+Beta <- vector(length = nrow(tpcdata))
+for (i in nrow(tpcdata)) {
+  mi <- summary(lm(nTotProvised ~ HLI, subset = (Habitat == i), data = tpcdata))
+  Beta[i]<- Mi$coefficients [2,1]
+}
+
+```
+
+### O. lig 
+Note: Make sure to only use data with provisioned cells
+#### Dat prep
+```{r}
+pvars <- data2[,c(2:4, 21:46)]
+x = colnames(pvars) # make list of response vars names
+
+# Count data
+ondata <- zo.data[,c(6, 2:4, 21:46)]
+on.out <- unlist(lapply(1, function(n) combn(x, 1, FUN=function(row) paste0("nOligGrowth ~ ", paste0(row, collapse = "+")))))
+#on.out
+
+# Ratio data
+ordata<- zo.data[,c(17, 2:4, 21:46)]
+or.out <- unlist(lapply(1, function(n) combn(x, 1, FUN=function(row) paste0("oligRatio ~ ", paste0(row, collapse = "+")))))
+#or.out
+```
+#### Count
+##### SLRs
+```{r}
+on.out <- unlist(lapply(1, function(n) combn(x, 1, FUN=function(row) paste0("nOligGrowth ~ ", paste0(row, collapse = "+")))))
+on.out
+
+#To have the regression coefficients
+on.mods = bind_rows(lapply(on.out, function(frml) {
+  a = tidy(lm(frml, data=ondata))
+  a$frml = frml
+  return(a)
+}))
+
+# check models
+on.mod.chk = bind_rows(lapply(on.out, function(frml) {
+  b = plot(lm(frml, data=ondata))
+  return(b)
+}))
+
+# many models are not normal and have curved residules
+
+head(on.mods)
+write.csv(on.mods, "tables/nOlig.lm.coeffs.csv")
+```
+Assumptions of linear models are Violated. Transform model or use GLM?
+
+##### SLRs - transformed
+```{r}
+on.out <- unlist(lapply(1, function(n) combn(x, 1, FUN=function(row) paste0("sqrt(nOligGrowth) ~ ", paste0(row, collapse = "+")))))
+on.out
+
+#To have the regression coefficients
+on.mods = bind_rows(lapply(on.out, function(frml) {
+  a = tidy(lm(frml, data=ondata))
+  a$frml = frml
+  return(a)
+}))
+
+head(on.mods)
+write.csv(on.mods, "tables/nOlig.sqrt.lm.coeffs.csv")
+```
+
+##### GLM - Poisson
+```{r}
+#To have the regression coefficients
+on.mods = bind_rows(lapply(on.out, function(frml) {
+  a = tidy(glm(frml, data=ondata, family = poisson()))
+  a$frml = frml
+  return(a)
+}))
+
+head(on.mods)
+write.csv(on.mods, "tables/nOlig.glm.pois.coeffs.csv")
+
+# to get model results
+on.mods2 = bind_rows(lapply(on.out, function(frml) {
+ a = glance(glm(frml, data=ondata, family = poisson()))
+ a$frml = frml
+ return(a)
+}))
+
+head(on.mods2)
+write.csv(on.mods2, "tables/nOlig.glm.pois.results.csv")
+```
+
+##### GLM - Quasi-Poisson
+```{r}
+#To have the regression coefficients
+on.qpmods = bind_rows(lapply(on.out, function(frml) {
+  a = tidy(glm(frml, data=ondata, family = quasipoisson()))
+  a$frml = frml
+  return(a)
+}))
+
+head(on.qpmods)
+write.csv(on.qpmods, "tables/nOlig.glm-qp.coeffs.csv")
+# results will be the exact same as poisson results minus AIC scores
+```
+
+##### GLM - Negative Binomial
+```{r}
+on.out <- unlist(lapply(1, function(n) combn(x, 1, FUN=function(row) paste0("nOligGrowth ~ ", paste0(row, collapse = "+")))))
+on.out
+
+#To have the regression coefficients
+on.mods = bind_rows(lapply(on.out, function(frml) {
+  a = tidy(glm.nb(frml, data=ondata))
+  a$frml = frml
+  return(a)
+}))
+
+head(on.mods)
+write.csv(on.mods, "tables/nOlig.glm.nb.coeffs.csv")
+
+# to get model results
+on.mods2 = bind_rows(lapply(on.out, function(frml) {
+ a = tidy(glm.nb(frml, data=ondata))
+ a$frml = frml
+ return(a)
+}))
+
+head(on.mods2)
+write.csv(on.mods2, "tables/nOlig.glm.nb.results.csv")
+```
+
+#### Ratio (%)
+##### SLR
+```{r}
+#To have the regression coefficients
+or.mods = bind_rows(lapply(or.out, function(frml) {
+  a = tidy(lm(frml, data=ordata))
+  a$frml = frml
+  return(a)
+}))
+
+head(or.mods)
+write.csv(or.mods, "tables/OligRatio.lm.coeffs.csv")
+
+# to get model results
+or.mods2 = bind_rows(lapply(or.out, function(frml) {
+ a = glance(glm(frml, data=ordata, family = poisson()))
+ a$frml = frml
+ return(a)
+}))
+
+head(or.mods2)
+write.csv(or.mods2, "tables/OligRatio.lm.results.csv")
+
+# check models
+on.mod.chk = bind_rows(lapply(on.out, function(frml) {
+  b = plot(lm(frml, data=ondata))
+  return(b)
+}))
+
+# many models are not normal and have curved or megaphone residuals
+```
+
+##### GLM - binomial
+```{r}
+#To have the regression coefficients
+or.mods = bind_rows(lapply(or.out, function(frml) {
+  a = tidy(glm(frml, data=ordata, family = binomial()))
+  a$frml = frml
+  return(a)
+}))
+
+head(or.mods)
+write.csv(or.mods, "tables/OligRatio.glm.bin.coeffs.csv")
+
+or.mods2 = bind_rows(lapply(or.out, function(frml) {
+ a = glance(glm(frml, data=ordata, family = binomial()))
+ a$frml = frml
+ return(a)
+}))
+head(or.mods2)
+write.csv(or.mods2, "tables/OligRatio.glm.bin.results.csv")
+```
+
+
+### T.stan
+Omit outlier
+#### Data org
+```{r}
+pvars <- data2[,c(2:4, 21:46)]
+x = colnames(pvars) # make list of response vars names
+
+# Count
+tndata <- zo.data.or[,c(7, 2:4, 21:46)]
+tn.out <- unlist(lapply(1, function(n) combn(x, 1, FUN=function(row) paste0("nTstanCells ~ ", paste0(row, collapse = "+")))))
+#tn.out
+
+# Ratio
+trdata <- zo.data.or[,c(18, 2:4, 21:46)]
+tr.out <- unlist(lapply(1, function(n) combn(x, 1, FUN=function(row) paste0("tstanRatio ~ ", paste0(row, collapse = "+")))))
+#tr.out
+```
+
+#### Count
+##### GLM - Poisson
+```{r}
+#To have the regression coefficients
+tn.mods = bind_rows(lapply(tn.out, function(frml) {
+  a = tidy(glm(frml, data=tndata, family = poisson()))
+  a$frml = frml
+  return(a)
+}))
+
+head(tn.mods)
+write.csv(tn.mods, "tables/nTstan.glm.coeffs.csv")
+
+tn.mods2 = bind_rows(lapply(tn.out, function(frml) {
+ a = glance(glm(frml, data=tndata, family = poisson()))
+ a$frml = frml
+ return(a)
+}))
+
+head(tn.mods2)
+write.csv(tn.mods2, "tables/nTstan.glm.results.csv")
+```
+
+##### GLM - Quasi-Poisson
+```{r}
+#To have the regression coefficients
+tn.qpmods = bind_rows(lapply(tn.out, function(frml) {
+  a = tidy(glm(frml, data=tndata, family = quasipoisson()))
+  a$frml = frml
+  return(a)
+}))
+
+head(tn.qpmods)
+write.csv(tn.qpmods, "tables/nTstan.glm-qp.coeffs.csv")
+
+# results will be the exact same as poisson results minus AIC scores
+```
+
+##### GLM - Negative Binomial
+```{r}
+#To have the regression coefficients
+tn.mods = bind_rows(lapply(tn.out, function(frml) {
+  a = tidy(glm.nb(frml, data=tndata))
+  a$frml = frml
+  return(a)
+}))
+
+head(tn.mods)
+write.csv(tn.mods, "tables/nTstan.glm.nb.coeffs.csv")
+```
+
+#### Ratio (%)
+##### GLM - binomial
+```{r}
+#To have the regression coefficients
+tr.mods = bind_rows(lapply(tr.out, function(frml) {
+  a = tidy(glm(frml, data=trdata, family = binomial()))
+  a$frml = frml
+  return(a)
+}))
+
+head(tr.mods)
+write.csv(tr.mods, "tables/TstanRatio.glm.bin.coeffs.csv")
+
+tr.mods2 = bind_rows(lapply(tr.out, function(frml) {
+ a = glance(glm(frml, data=trdata, family = binomial()))
+ a$frml = frml
+ return(a)
+}))
+head(tr.mods2)
+write.csv(tr.mods2, "tables/TstanRatio.glm.bin.results.csv")
+```
+
+## 2) Correlations
+### All
+```{r}
+cor.data<-cor(pvars[,-c(1:2)], use='complete.obs', method = "spearman")
+pmat.data<-cor_pmat(cor.data, method = "spearman") # for ggcorrplot
+
+corr.plot<-
+  ggcorrplot(cor.data, lab = TRUE, type= "lower", p.mat = pmat.data, show.diag = T, sig.level = 0.1,
+           ggtheme = ggplot2::theme_classic(), outline.col="white",
+           colors = c("grey50", "grey70", "grey90")) +
+  theme(plot.title = element_text(hjust = 0.5))
+  
+save_plot("sfigures\\corplot.predictVars.png", corr.plot, base_height=15, bg="white") 
+```
+Note: EVT
+
+### Climate
+#### With Climate Normals
+```{r}
+cor.cdata<-cor(zo.data.or[,c(17, 34:45, 49)], use='complete.obs', method = "spearman")
+pmat.cdata<-cor_pmat(cor.cdata, method = "spearman") # for ggcorrplot
+
+Ccorr.plot<-
+  ggcorrplot(cor.cdata, lab = TRUE, type= "lower", p.mat = pmat.cdata, show.diag = T, sig.level = 0.1,
+           ggtheme = ggplot2::theme_classic(), outline.col="white",
+           colors = c("grey50", "grey70", "grey90")) + labs(title = "Climate Variables")+
+  theme(plot.title = element_text(hjust = 0.5))
+  
+save_plot("sfigures\\corplot.climateVars.png", Ccorr.plot, base_height=7.5, bg="white") 
+```
+
+#### Without Climate Normals
+```{r}
+cor.cdata2<-cor(zo.data.or[,c(38:45,49)], use='complete.obs', method = "spearman")
+pmat.cdata2<-cor_pmat(cor.cdata2, method = "spearman") # for ggcorrplot
+
+Ccorr.plot2<-
+  ggcorrplot(cor.cdata2, lab = TRUE, type= "lower", p.mat = pmat.cdata2, show.diag = T, sig.level = 0.1,
+           ggtheme = ggplot2::theme_classic(), outline.col="white",
+           colors = c("grey50", "grey70", "grey90")) + labs(title = "Climate Variables")+
+  theme(plot.title = element_text(hjust = 0.5))
+  
+save_plot("sfigures\\corplot.climateVars2.png", Ccorr.plot2, base_height=7.5, bg="white") 
+```
+DD_accumulated is not correlated to normals, but is correlated with bi and qrt climates. 
+Bi-temps are correlated with normal temps and min/mean qrt temps. 
+Use Ann_ppt_mm and DD_accumulated
+
+### Flora
+```{r}
+cor.pdata<-cor(zo.data.or[50:52], use='complete.obs', method = "spearman")
+pmat.pdata<-cor_pmat(cor.pdata, method = "spearman") # for ggcorrplot
+
+pcorr.plot<-
+  ggcorrplot(cor.pdata, lab = TRUE, type= "lower", p.mat = pmat.pdata, show.diag = T, sig.level = 0.1,
+           ggtheme = ggplot2::theme_classic(), outline.col="white",
+           colors = c("grey50", "grey70", "grey90")) + labs(title = "Plant Variables")+
+  theme(plot.title = element_text(hjust = 0.5))
+  
+save_plot("sfigures\\corplot.plantVars.png", pcorr.plot, base_height=7.5, bg="white") 
+```
+Not correlated, but none were significant predictors
+
+### Tree
+```{r}
+cor.tdata<-cor(zo.data.or[,c(56,66:67)], use='complete.obs', method = "spearman")
+pmat.tdata<-cor_pmat(cor.tdata, method = "spearman") # for ggcorrplot
+
+tcorr.plot<-
+  ggcorrplot(cor.tdata, lab = TRUE, type= "lower", p.mat = pmat.tdata, show.diag = T, sig.level = 0.1,
+           ggtheme = ggplot2::theme_classic(), outline.col="white",
+           colors = c("grey50", "grey70", "grey90")) + labs(title = "Tree Variables")+
+  theme(plot.title = element_text(hjust = 0.5))
+  
+save_plot("sfigures\\corplot.treeVars.png", tcorr.plot, base_height=7.5, bg="white") 
+```
+Not correlated, but none were significant predictors
+
+### Landscape
+```{r}
+# Landscape Indexes
+cor.idata<-cor(zo.data.or[,c(40:42)], use='complete.obs', method = "spearman")
+pmat.idata<-cor_pmat(cor.idata, method = "spearman") # for ggcorrplot
+
+icorr.plot<-
+  ggcorrplot(cor.idata, lab = TRUE, type= "lower", p.mat = pmat.idata, show.diag = T, sig.level = 0.1,
+           ggtheme = ggplot2::theme_classic(), outline.col="white",
+           colors = c("grey50", "grey70", "grey90")) + labs(title = "Landscape indexes")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+# Landscape Types (43 & 45 Barren and Crops)
+cor.ltdata<-cor(zo.data.or[,c(44, 46:48)], use='complete.obs', method = "spearman")
+pmat.ltdata<-cor_pmat(cor.ltdata, method = "spearman") # for ggcorrplot
+
+ltcorr.plot<-
+  ggcorrplot(cor.ltdata, lab = TRUE, type= "lower", p.mat = pmat.ltdata, show.diag = T, sig.level = 0.1,
+           ggtheme = ggplot2::theme_classic(), outline.col="white",
+           colors = c("grey50", "grey70", "grey90")) + labs(title = "Landscape type variables")+
+  theme(plot.title = element_text(hjust = 0.5))
+
+# All Landscape vars
+cor.ldata<-cor(zo.data.or[,c(40:44, 46:48)], use='complete.obs', method = "spearman")
+pmat.ldata<-cor_pmat(cor.ldata, method = "spearman") # for ggcorrplot
+
+lcorr.plot<-
+  ggcorrplot(cor.ldata, lab = TRUE, type= "lower", p.mat = pmat.ldata, show.diag = T, sig.level = 0.1,
+           ggtheme = ggplot2::theme_classic(), outline.col="white",
+           colors = c("grey50", "grey70", "grey90")) + labs(title = "Landscape Variables")+
+  theme(plot.title = element_text(hjust = 0.5))
+  
+save_plot("sfigures\\corplot.landIndex.png", icorr.plot, base_height=7.5, bg="white") 
+save_plot("sfigures\\corplot.landTypeVars.png", ltcorr.plot, base_height=7.5, bg="white") 
+save_plot("sfigures\\corplot.landVars.png", lcorr.plot, base_height=7.5, bg="white") 
+```
+Just index: none are *sig* correlated, but evenness and diversity are 94% correlated (???)
+Just landscapes: Con Forests and Rangeland (-0.82)
+All: EVT_H ~ EVT_J & EVT_rich, Rangeland and Indices, Rangeland and Con forests
+
+## 3) Data check
+### O.lig count
+#### Sig var check
+Sig predictors: none
+Marginally sig predictors: Ann_tmin_C, qrt_tmax_C
+```{r}
+on1<- lm(sqrt(nOligGrowth)~Ann_tmin_C, data = zo.data)
+plot(on1) # curved resids, normal
+
+on2<- lm(sqrt(nOligGrowth)~qrt_tmax_C, data = zo.data)
+plot(on2) # curved resids, normal
+
+pairs(sqrt(nOligGrowth) ~ Ann_tmin_C + Ann_tmean_C + Ann_tmax_C + qrt_tmin_C + qrt_tmean_C + qrt_tmax_C, data = zo.data)
+
+pairs((nOligGrowth) ~ Ann_tmin_C + qrt_tmax_C, data = zo.data) 
+# doesn't seem to be a strong relationship between Olig and temp, but climate vars are very correlated (not independent?)
+plot((zo.data$nOligGrowth), zo.data$Ann_tmin_C)
+plot((zo.data$nOligGrowth), zo.data$qrt_tmax_C)
+```
+
+# Analysis
+## Q1a) O. lignaria by all vars
+### Count
+#### SLR
+If you look just at climate variables, Ann_tmin_C and qrt_tmax_C are not correlated
+```{r}
+on_mod<-lm(sqrt(nOligGrowth) ~ Ann_tmin_C * qrt_tmax_C, data = zo.data)
+summary(on_mod) # all marginally sig
+plot(on_mod) # fairly normal, curved resids
+
+on_mod2<-lm(sqrt(nOligGrowth) ~ Ann_tmin_C + qrt_tmax_C, data = zo.data)
+summary(on_mod2) # not sig. Interesting
+plot(on_mod2) # fairly normal
+
+# interaction or no interaction?
+drop1(on_mod, test = "F") # interaction is marginally significant
+
+op <- par(mfrow=c(2,2), mar=c(5,4,1,2))
+plot(on_mod, add.smooth = F, which = 1)
+E <- resid(on_mod)
+hist(E, xlab = "Residuals", main = "")
+plot(zo.data$Ann_tmin_C, E, xlab="Normal min temperature", ylab = "residuals")
+plot(zo.data$qrt_tmax_C, E, xlab="May-June max temperature", ylab = "residuals")
+par(op)
+
+#Barlett’s test for homogeneity
+bartlett.test(E, zo.data$Ann_tmin_C)
+bartlett.test(E, zo.data$Ann_tmin_C)
+
+E1 <- E[zo.data$Ann_tmin_C <= 1.5] # plot suggests different spread for observations above 1.5 than below 1.5
+E2 <- E[zo.data$Ann_tmin_C > 1.5]
+var.test(E1, E2) # not sig - good!
+
+E3 <- E[zo.data$qrt_tmax_C <= 23.5] # from plot
+E4 <- E[zo.data$qrt_tmax_C > 23.5]
+var.test(E3, E4) # not sig - but close (p = 0.07)
+
+# curved resids (from plot(on_mod)), suggests variables are not independent
+plot(y = zo.data$Ann_tmin_C, x = zo.data$qrt_tmax_C) # correlated
+```
+
+#### GLM
+```{r}
+on.glm.p1 <- glm(nOligGrowth ~ Ann_tmin_C, data = zo.data, family = poisson())
+summary(on.glm.p1)
+
+on.glm.nb1 <- glm.nb(nOligGrowth ~ Ann_tmin_C, data = zo.data)
+summary(on.glm.nb1)
+
+on.glm.qp1 <- glm(nOligGrowth ~ Ann_tmin_C, data = zo.data, family = quasipoisson())
+summary(on.glm.qp1)
+```
+
+### Ratio
+#### SLR
+```{r}
+or_mod<-lm(oligRatio ~ stemdiv, data = zo.data)
+summary(or_mod)
+plot(or_mod) # some outliers, but fairly normal. Curved residuals
+```
+
+## Q1b) T.stan by All vars
+### GLM - Poisson
+```{r}
+tn.glm <-glm(nTstanCells ~ EVT_J + WUI, data = zo.data.or, family = poisson())
+summary(tn.glm)
+```
+
+### Check fit
+#### Plotting resids
+```{r}
+E1 <- resid(tn.glm, type="pearson")
+F1 <- fitted(tn.glm, type="response")
+
+scatter.smooth(F1, E1, cex.lab = 1.5, xlab="Fitted values", ylab="Pearson Residuals")
+abline(h = 0, lty=2)
+plot(tn.glm)
+
+EP <- resid(tn.glm, type = "pearson")
+ED <- resid(tn.glm, type = "deviance")
+mu <- predict(tn.glm, type = "response")
+E <- zo.data.or$nTstanCells - mu
+EP2 <- E / sqrt(7.630148 * mu)
+op <- par(mfrow = c(2, 2))
+plot(x = mu, y = E, main = "Response residuals")
+plot(x = mu, y = EP, main = "Pearson residuals")
+plot(x = mu, y = EP2,
+main = "Pearson residuals scaled")
+plot(x = mu, y = ED, main = "Deviance residuals")
+par(op) # doesn't look too bad
+```
+
+#### Over dispersion
+```{r}
+e2<-resid(tn.glm, type="pearson")
+n<-nrow(zo.data.or)
+p<-length(coef(tn.glm))
+sum(e2^2)/(n-p) # overdispersed (2.2)
+
+# or --> residules/dfs 
+```
+Model is over dispersed
+* Quick fix --> Quasipoisson
+* Complicated fix (I guess ??) - Negative Binomial
+
+### GLM - Quasipoisson/NB
+```{r}
+# Quasipoisson
+tn.glm.qp<-glm(nTstanCells ~ EVT_J + WUI, data = zo.data.or, family = quasipoisson())
+summary(tn.glm.qp)
+
+# Negaitvie Binomial
+tn.glm.nb<-glm.nb(nTstanCells ~ EVT_J + WUI, data = zo.data.or)
+summary(tn.glm.nb)
+```
+
+
+## Q2) T. stan effects on fitness
+### Tstan cells ~ Provisioned cells
+#### With outlier
+```{r}
+glm.ntpc<- glm(nTstanCells ~  nTotProvised, data = zo.data, family = poisson()) 
+tidy(glm.ntpc) # sig. AIC: 153.5
+plot(glm.ntpc) # resids curved, normal
+
+# check for over/underdispersion
+e2<-resid(glm.ntpc, type="pearson")
+n<-nrow(zo.data)
+p<-length(coef(glm.ntpc))
+sum(e2^2)/(n-p) # produces overdispersion (2.4)
+
+# quasipoisson
+glm.ntpc.qp<- glm(nTstanCells ~  nTotProvised, data = zo.data, family = quasipoisson()) 
+summary(glm.ntpc.qp) # sig. 
+
+# negative binomial glm
+glm.ntpc.nb<-glm.nb(nTstanCells ~  nTotProvised, data = zo.data, link = "log") 
+tidy(glm.ntpc.nb) # sig, lower RSE (16), 12 df, AIC 137.06
+plot(glm.ntpc.nb) # curved resids, outlier pull
+
+e2<-resid(glm.ntpc.nb, type="pearson")
+p<-length(coef(glm.ntpc.nb))
+sum(e2^2)/(n-p) # better (1.02)
+
+glm.ntpc.nb1<-glm.nb(nTstanCells ~  sqrt(nTotProvised), data = zo.data, link = "log") 
+tidy(glm.ntpc.nb1) # sig, lower RSE (16), 12 df, AIC 65.5
+plot(glm.ntpc.nb1) # curved resids, not normal
+```
+
+#### Without outlier
+```{r}
+glm.ntpc.rmo<- glm(nTstanCells ~  nTotProvised, data = zo.data.or, family = poisson()) 
+tidy(glm.ntpc.rmo) # sig. AIC: 130.85
+plot(glm.ntpc.rmo) # curved resids, not really normal
+
+# check for over/underdispersion
+e2<-resid(glm.ntpc.rmo, type="pearson")
+n<-nrow(zo.data.or)
+p<-length(coef(glm.ntpc.rmo))
+sum(e2^2)/(n-p) # produces overdispersion (1.91)
+
+# quasipoisson
+glm.ntpc.no.qp<- glm(nTstanCells ~  nTotProvised, data = zo.data.or, family = quasipoisson()) 
+summary(glm.ntpc.no.qp) # sig. 
+
+# negative binomial glm
+glm.ntpc.rmo.nb<-glm.nb(nTstanCells ~  nTotProvised, data = zo.data.or, link = "log") 
+tidy(glm.ntpc.rmo.nb) # sig, lower RSE (14), 11 df, AIC 56
+plot(glm.ntpc.rmo.nb) # curved resids, not normal
+
+e2<-resid(glm.ntpc.rmo.nb, type="pearson")
+p<-length(coef(glm.ntpc.rmo.nb))
+sum(e2^2)/(n-p) # still some overdispersion (1.09)
+```
+
+### Tstan cells ~ O.lig cells 
+How does O. lignaria abundance predict T. stansburyi abundance?
+```{r}
+# with outlier
+glm.nt1<-glm(nTstanCells ~ nOligGrowth, data=zo.data, family = poisson())
+tidy(glm.nt1) # sig. AIC:75.648
+plot(glm.nt1) # megaphone resids, oulier departure
+
+glm.nt1.nb<-glm.nb(nTstanCells ~ nOligGrowth, data=zo.data, link="log")
+tidy(glm.nt1.nb) # sig. AIC:235.4
+plot(glm.nt1.nb) # resids ok, normal
+
+# without outlier
+glm.nt2<-glm(nTstanCells ~ nOligGrowth, data=zo.data.or, family = poisson())
+tidy(glm.nt2) # sig. AIC:141.9
+plot(glm.nt2) # curved resids, mostly normal
+
+glm.nt2.nb<-glm.nb(nTstanCells ~ nOligGrowth, data=zo.data.or, link="log")
+tidy(glm.nt2.nb) # sig. AIC:132.41
+plot(glm.nt2.nb) # megaphone resids, normal
+```
+
+Does T. abundance abundance predict O. lignaria abundance?
+How does O. lignaria abundance predict T. stansburyi abundance?
+```{r}
+lm.nt<-lm(nOligGrowth ~ nTstanCells, data=zo.data.or)
+tidy(lm.nt) # sig
+plot(lm.nt) # curved resids, normal
+```
+
+### O.lig Ratio ~ T.stan Ratio
+How does T.stan brood ratios affect O. lignaria ratios
+#### Plots
+```{r}
+plot(oligRatio ~ tstanRatio, data = zo.data.or) # slight decrease?
+```
+#### SLR
+Note: Olig ratios transformed become normal, but T.stan ratios still zero heavy. Sqrt does seem to help
+```{r}
+# with outlier
+lm.to1<-lm(oligRatio ~ tstanRatio, data = zo.data) 
+tidy(lm.to1) # marginally sig
+plot(lm.to1) # megaphone residuals, some outliers, but fairly normal
+AIC(lm.to1)
+shapiro.test(lm.to1$residuals) # sig
+
+e2<-resid(lm.to1, type="pearson")
+n<-nrow(zo.data.or)
+p<-length(coef(lm.to1))
+sum(e2^2)/(n-p) # under dispersion (0.05)
+
+lm.to2<-lm(oligRatio ~ tstanRatio, data = zo.data.or)
+tidy(lm.to2) # not sig.
+plot(lm.to2) #  megaphone residuals, departure from normal
+shapiro.test(lm.to2$residuals) # technically not sig
+
+lm.to3<-lm(oligRatio ~ log(tstanRatio+1,base=10), data = zo.data.or)
+tidy(lm.to3) # not sig
+plot(lm.to3) # megaphone residuals, departure from normal
+
+lm.to4<-lm(sqrt(oligRatio) ~ sqrt(tstanRatio), data = zo.data.or)
+tidy(lm.to4) # sig. r2 = 0.3
+plot(lm.to4) # worse
+
+lm.to5<-lm(log(oligRatio+1, base=10) ~log(tstanRatio+1,base=10), data = zo.data)
+tidy(lm.to5) # marginally sig. r2 = 0.3
+plot(lm.to5) # megaphone residuals, some departure
+```
+
+### O.lig fitness ~  T.stan ratio
+#### Plots
+```{r}
+# with T.stan outlier
+## T. stan Ratio
+plot(avgOligFMass_mg ~ tstanRatio, data = fw.data) # no difference
+plot(avgOligMMass_mg ~ tstanRatio, data = mw.data) # no difference
+plot(oligFRatio ~ tstanRatio, data = fw.data) # decrease
+## T. stan abundance
+plot(avgOligFMass_mg ~ nTstanCells, data = fw.data) # increase? Hard to say with outlier
+plot(avgOligMMass_mg ~ nTstanCells, data = mw.data) # hard to say with outlier
+plot(oligFRatio ~ nTstanCells, data = fw.data) # decrease
+
+# no T.stan outlier
+## T. stan Ratio
+plot(avgOligFMass_mg ~ tstanRatio, data = fw.data.or) # no difference
+plot(avgOligMMass_mg ~ tstanRatio, data = mw.data[-c(2),]) # no difference
+plot(oligFRatio ~ tstanRatio, data = fw.data.or) # no difference
+## T. stan abundance
+plot(avgOligFMass_mg ~ nTstanCells, data = fw.data.or) # no difference
+plot(avgOligMMass_mg ~ nTstanCells, data = mw.data[-c(2),]) # no difference
+plot(oligFRatio ~ nTstanCells, data = fw.data.or) # decrease
+```
+
+#### Count
+##### SLR
+```{r}
+lm.tm<-lm(avgOligMMass_mg ~ nTstanCells, data = mw.data.or)
+tidy(lm.tm) # not sig
+plot(lm.tm) # residuals slightly curved, normal
+
+lm.tf<-lm(avgOligFMass_mg ~ nTstanCells, data = fw.data.or2)
+tidy(lm.tf) # not sig
+plot(lm.tf) # Some outliers, but not bad, residuals are okay
+
+lm.tfr<-lm(oligFRatio ~ nTstanCells, data = fw.data.or)
+summary(lm.tfr) #  sig
+plot(lm.tfr) # megaphone resids, some departure, but not bad
+shapiro.test(lm.tfr$residuals) # not sig
+
+lm.tfr<-lm(oligFRatio ~ nTstanCells, data = fw.data.or2)
+summary(lm.tfr) #  not sig
+plot(lm.tfr) # megaphone resids, some departure, but not bad
+shapiro.test(lm.tfr$residuals) # not sig
+```
+
+##### GLMs
+```{r}
+glm.tm<-glm(avgOligMMass_mg ~ nTstanCells, data = mw.data.or)
+summary(glm.tm) # not sig
+
+glm.tf<-glm(avgOligFMass_mg ~ nTstanCells, data = fw.data.or2)
+summary(glm.tf) # not sig
+
+## F ratio - both years
+tfr.glm.bin<-glm(oligFRatio ~ nTstanCells, data = fw.data.or, family = binomial())
+summary(tfr.glm.bin) #  not sig
+
+## F ratio - 2021
+tfr.glm.bin2<-glm(oligFRatio ~ nTstanCells, data = fw.data.or2, family = binomial())
+summary(tfr.glm.bin2) #  not sig
+```
+#### Ratio
+##### SLR
+```{r}
+lm.tmp<-lm(avgOligMMass_mg ~ tstanRatio, data = mw.data[-c(2),])
+tidy(lm.tmp) # not sig
+plot(lm.tmp) # normal
+
+lm.tfp<-lm(avgOligFMass_mg ~ tstanRatio, data = fw.data.or)
+tidy(lm.tfp) # not sig
+plot(lm.tfp) # curved residuals, some outlier departure
+shapiro.test(lm.tfp$residuals) # not sig
+
+lm.tfr<-lm(oligFRatio ~ tstanRatio, data = fw.data.or)
+tidy(lm.tfr) # marginally sig
+plot(lm.tfr) # megaphone resids, some departure, but not bad
+shapiro.test(lm.tfr$residuals) # not sig
+```
+
+
+
+# Figures
+## Q1) Predictor effects models
+Predictor effects models: 
+O.lig model: on.glm.qp1 <- glm(nOligGrowth ~ Ann_tmin_C, data = zo.data, family = quasipoisson())
+  O.lig ~ Ann_tmin_CC (marginally sig)
+T. stan model: tn.glm.qp<-glm(nTstanCells ~ EVT_J + WUI, data = zo.data.or, family = quasipoisson())
+  T.stan ~ EVT_J (not sig) + WUI (sig)
+```{r}
+pem_atmin <- plot(predictorEffect("Ann_tmin_C", on.glm.qp1), main = "", 
+                  xlab = expression("Normal minimum temperature ("*~degree*C*")"), 
+                  ylab = expression(paste(italic("O. lignaria"), " abundance")), 
+                  lines=list(col = "black"), lwd = 2, lty = "dashed")
+
+# T. stan
+## to plot all predictor variables in a model:
+plot(predictorEffects(tn.glm.qp, residuals = TRUE), 
+     #lines = list(col = "black"), # change line color
+     lwd = 2, # change line width
+     partial.residuals=list(smooth = TRUE, span = 0.75),# add residuals)
+     lty = "dashed")
+
+## EVT_J
+pem_evt<-plot(predictorEffect("EVT_J", tn.glm.qp),
+     main = "", 
+     xlab = expression("Landscape evenness"), 
+     ylab = expression(paste(italic("T. stansburyi"), " abundance")), 
+     lines=list(col = "grey"), lwd = 2)
+     
+pem_wui <- plot(predictorEffect("WUI", tn.glm.qp), 
+                main = "", 
+                xlab = expression("Urban development"), 
+                ylab = expression(paste(italic("T. stansburyi"), " abundance")), 
+                lines=list(col = "black"), lwd = 2)
+
+olig_tstan_pem<-plot_grid(pem_atmin, pem_evt, pem_wui, ncol=2, nrow=2, labels = c("A", "B", "C"))
+save_plot("figures\\olig.tstan.pem.png", olig_tstan_pem, base_height=7.5, bg="white")
+```
+
+## Q2) 
+### Data org
+```{r}
+# To add labels for sites sampled both years
+plotdata<-zo.data %>% group_by(Site) %>%
+  mutate(Year2 = n_distinct(Year)) %>% 
+  #mutate(Year3 = as.factor(ifelse(Year2 == 2, "B", "")))
+  mutate(Year3 = as.factor(ifelse(Year2 == 2, Site, "")))
+
+tstan.plot<-filter(plotdata, nTstanCells < 10)
+or.plot<-filter(plotdata, oligRatio > 0)
+fw.plot <- filter(plotdata, avgOligFMass_mg > 0)
+fw.plot2 <- filter(plotdata, avgOligFMass_mg > 0 & Year == 2021)
+mw.plot <- filter(plotdata, avgOligMMass_mg > 0)
+lw.plot <- filter(plotdata, avgOligLarvMass_mg > 0)
+```
+### Tstan Count ~ Provisioned cells
+```{r}
+# Poisson
+tpc.tstan<-
+ggplot(data = tstan.plot, aes(x=nTotProvised, y = nTstanCells))+
+    geom_point(aes(color = Habitat, fill = Habitat, shape = Habitat), size = 5, color = "black")+
+      scale_fill_manual(values=c("grey50", "grey70", "grey90")) +
+      scale_shape_manual(values=c(21:23))+
+    stat_smooth(method="glm", formula = y ~ x, color = "black", fill = "lightgray", method.args =
+                  list(family = poisson))+
+    geom_text_repel(aes(x = nTotProvised, label = Year3), size = 5)+
+    xlab(expression(paste(italic("O. lignaria"), " provisioned cells")))+
+    ylab(expression(paste("Total ", italic("T. stansburyi "), "count"))) +
+    ylim(0, 10) + xlim(0,135)+
+    theme_classic()+
+    theme(plot.title = element_text(hjust = 0.5, size = 20), legend.position="right", 
+          legend.text = element_text(size=16), axis.text.x = element_text(size=18), 
+          axis.text.y = element_text(size=18), legend.title = element_text(size = 18),
+          axis.title.x = element_text(size=20), axis.title.y =element_text(size=20),
+          plot.margin=unit(c(1,1,1,1),"cm"))
+
+# Negative Binomial
+#ee <- emmeans(glm.ntpc.rmo.nb, "nTotProvised", type = "response", offset = log(1))
+# https://cran.r-project.org/web/packages/emmeans/vignettes/sophisticated.html#offsets
+
+#tpc.tstan.nb<-
+#https://stackoverflow.com/questions/76742036/how-to-make-a-plot-of-a-negative-binomial-regression-fitted-values-and-95-conf
+
+save_plot("figures\\tpc.tstan.png", tpc.tstan, base_height = 5.5, base_aspect_ratio = 2, bg="white")
+```
+
+### Tstan Count ~ Olig Count
+```{r}
+tn.on.lm<-
+ggplot(data = tstan.plot, aes(x = nTstanCells, y = nOligGrowth))+
+    geom_point(aes(color = Habitat, fill = Habitat, shape = Habitat), size = 5, color = "black")+
+    scale_fill_manual(values=c("grey50", "grey70", "grey90")) +
+    scale_shape_manual(values=c(21:23))+
+    stat_smooth(method="lm", color = "black", fill = "lightgray")+
+    geom_text_repel(aes(x = nTstanCells, label = Year3), size = 5)+ 
+    xlab(expression(paste("Total ", italic("T. stansburyi"), " count"))) +  
+    ylab(expression(paste("Total ", italic("O. lignaria"), " count")))+
+    xlim(0,10) + ylim(0,100)+ 
+    theme_classic()+
+    theme(plot.title = element_text(hjust = 0.5, size = 20), legend.position="right", 
+          legend.text = element_text(size=16), axis.text.x = element_text(size=18), 
+          axis.text.y = element_text(size=18), legend.title = element_text(size = 18),
+          axis.title.x = element_text(size=20), axis.title.y =element_text(size=20),
+          plot.margin=unit(c(1,1,1,1),"cm"))
+
+save_plot("figures\\tstann.olig.lm.png", tn.on.lm, base_height=5.5, base_aspect_ratio = 3, bg="white")
+```
+
+### O.lig Ratio ~ T.stan Ratio
+```{r}
+tr.or.lm<-
+ggplot(data = or.plot, aes(x = (tstanRatio*100), y = (oligRatio*100)))+
+    geom_point(aes(color = Habitat, fill = Habitat, shape = Habitat), size = 5, color = "black")+
+    scale_fill_manual(values=c("grey50", "grey70", "grey90")) +
+    scale_shape_manual(values=c(21:23))+
+    #stat_smooth(method="lm", color = "black", fill = "lightgray", linetype = 2)+
+    geom_text_repel(aes(x = (tstanRatio*100), label = Year3), size = 5)+
+    ylab(expression(paste(italic("O. lignaria"), " brood ratio (%)")))+
+    xlab(expression(paste(italic("T. stansburyi")," brood ratio (%)"))) +
+    xlim(0,20)+ ylim(0,100)+
+    theme_classic()+
+    theme(plot.title = element_text(hjust = 0.5, size = 20), legend.position="right", 
+          legend.text = element_text(size=16), axis.text.x = element_text(size=18), 
+          axis.text.y = element_text(size=18), legend.title = element_text(size = 18),
+          axis.title.x = element_text(size=20), axis.title.y =element_text(size=20),
+          plot.margin=unit(c(1,1,1,1),"cm"))
+save_plot("figures\\tstanr.oligr.lm.png", tr.or.lm, base_height=5.5,base_aspect_ratio = 2, bg="white")
+```
+
+### O.lig F Ratio ~ T.stan Ratio/count
+```{r}
+tr.fr.lm<-
+ggplot(data = fw.plot2, aes(x = (tstanRatio*100), y = (oligFRatio*100)))+
+    geom_point(aes(color = Habitat, fill = Habitat, shape = Habitat), size = 5, color = "black")+
+    scale_fill_manual(values=c("grey50", "grey70", "grey90")) +
+    scale_shape_manual(values=c(21:23))+
+    stat_smooth(method="lm", color = "black", fill = "lightgray",linetype = 2)+
+    geom_text_repel(aes(x = (tstanRatio*100), label = Year3), size = 5)+
+    ylab(expression(paste(italic("O. lignaria"), " female ratio (%) ")))+
+    xlab(expression(paste(italic("T. stansburyi")," brood ratio (%)"))) +
+    xlim(0,20)+ ylim(0,100)+
+    theme_classic()+
+    theme(plot.title = element_text(hjust = 0.5, size = 20), legend.position="right", 
+          legend.text = element_text(size=16), axis.text.x = element_text(size=18), 
+          axis.text.y = element_text(size=18), legend.title = element_text(size = 18),
+          axis.title.x = element_text(size=20), axis.title.y =element_text(size=20),
+          plot.margin=unit(c(1,1,1,1),"cm"))
+
+save_plot("figures\\tstanr.oligFr.lm.png", tr.fr.lm, base_height=5.5,base_aspect_ratio = 2, bg="white")
+
+tn.fr.lm<-
+ggplot(data = fw.plot2, aes(x = nTstanCells, y = (oligFRatio*100)))+
+    geom_point(aes(color = Habitat, fill = Habitat, shape = Habitat), size = 5, color = "black")+
+    scale_fill_manual(values=c("grey50", "grey70", "grey90")) +
+    scale_shape_manual(values=c(21:23))+
+    stat_smooth(method="lm", color = "black", fill = "lightgray")+
+    geom_text_repel(aes(x = (tstanRatio*100), label = Year3), size = 5)+
+    ylab(expression(paste(italic("O. lignaria"), " female ratio (%) ")))+
+    xlab(expression(paste("Total ", italic("T. stansburyi"), " count"))) +  
+    xlim(0,10)+ ylim(0,100)+
+    theme_classic()+
+    theme(plot.title = element_text(hjust = 0.5, size = 20), legend.position="right", 
+          legend.text = element_text(size=16), axis.text.x = element_text(size=18), 
+          axis.text.y = element_text(size=18), legend.title = element_text(size = 18),
+          axis.title.x = element_text(size=20), axis.title.y =element_text(size=20),
+          plot.margin=unit(c(1,1,1,1),"cm"))
+
+save_plot("figures\\tstann.oligFr.lm.png", tn.fr.lm, base_height=5.5,base_aspect_ratio = 2, bg="white")
+```
+
+### Combine all
+```{r}
+tstann.olign.all=ggarrange(tpc.tstan, tn.on.lm, tr.or.lm, tn.fr.lm,  
+                               ncol=2, nrow = 2, common.legend = TRUE, legend = "right", 
+                               labels = c("A", "B", "C", "D"))
+save_plot("figures\\tstann.olign.all.png", tstann.olign.all, base_height=10, base_aspect_ratio = 2, bg="white")
+```

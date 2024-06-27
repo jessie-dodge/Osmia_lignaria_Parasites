@@ -1,0 +1,965 @@
+---
+title: "02a_beeReproDev_DataExploration"
+author: "Jessie Dodge"
+date: "2024-05-23"
+output:
+  word_document: default
+  pdf_document: 
+    latex_engine: xelatex
+    keep_tex: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = TRUE) 
+```
+
+# Library
+```{r, include = FALSE}
+source(file="01i_beeReproDev_MasterData.R")
+```
+
+# Data org
+```{r}
+# To add labels for sites sampled both years
+data<-data %>% group_by(Site) %>%
+  mutate(Year2 = n_distinct(Year)) %>% 
+  #mutate(Year3 = as.factor(ifelse(Year2 == 2, "B", "")))
+  mutate(Year3 = as.factor(ifelse(Year2 == 2, Site, "")))
+
+# turn SiteYr to rownames
+data<-data %>% column_to_rownames(var = "SiteYr")
+
+# re org and select columns you want to keep
+data2<-data[,c(1:3, 14:42, 46:49, 53, 63:64, 67:75)]
+# Count/proportion data 
+colSums(data2[,c(5:20, 43:48)] > 0) # Crops are only in 3 sites, and Barren are only in 2 sites
+data2<-data2[,-c(43,45)] # omit crops and barren
+
+# omit site with no provisioned cells - zeros omitted (zo)
+zo.data<-filter(data2, nTotProvised > 0)
+
+# Data subsets
+# for count/weight data
+## all
+or.data <- filter(zo.data, oligRatio > 0)
+w.data <- filter(zo.data, avgOligMass_mg > 0)
+fw.data <- filter(zo.data, avgOligFMass_mg > 0)
+mw.data <- filter(zo.data, avgOligMMass_mg > 0)
+lw.data <- filter(zo.data, avgOligLarvMass_mg > 0)
+
+# remove T. stan outlier
+zo.data.or <- filter(zo.data, nTstanCells < 10)
+fw.data.or <- filter(zo.data.or, avgOligFMass_mg > 0)
+fw.data.or2 <- filter(zo.data.or, avgOligFMass_mg > 0 & Year == 2021)
+mw.data.or <- filter(zo.data.or, avgOligMMass_mg > 0)
+lw.data.or <- filter(zo.data.or, avgOligLarvMass_mg > 0)
+or.data.or <- filter(or.data, nTstanCells < 10 & Year == 2021)
+```
+# Questions
+Q1) How does landscape and climate variation affect bee parasitism?
+  * Proposed analyses: MLRs 
+    ** Parasite abundance ~ Year + Hab + Landscape + Climate + Floral
+Q2) How does parasitism abundance affect bee fitness traits?
+  * Proposed analyses: SLRs 
+    ** bee % ~ parasite %
+    ** bee abundance ~ parasite abundance
+    ** bee mass ~ parasite abundance (2021)
+    ** F% ~ parasite abundance (2021)
+
+# Data distribution 
+## O. lignaria
+### All sites
+```{r, include=FALSE, echo=FALSE}
+# All sites
+## Ratios
+hist(data$oligRatio) # sort of normal? After ignoring zeros
+hist(sqrt(data$oligRatio)) # worse
+hist(log(data$oligRatio +1, base=10)) #  still zero heavy, but a bit better
+hist(1/(data$oligRatio)) # right skewed 
+
+## counts
+hist(data$nTotProvised) # skewed, but not quite poisson (not zero heavy)
+hist(sqrt(data$nTotProvised)) # more normal
+hist(log(data$nTotProvised+1,base=10)) # a bit left skewed but better
+hist(log(data$nTotProvised+1)) # VERY left skewed
+hist(1/(data$nTotProvised)) # worse
+
+### Ratio by year
+ggplot(data, aes(x = oligRatio)) + 
+  geom_histogram(aes(color = Year, fill = Year), position = "identity", bins = 25, alpha = 0.4) 
+  # zero heavy - especially in 2021
+
+### Counts by year
+ggplot(data, aes(x = nTotProvised)) + 
+  geom_histogram(aes(color = Year, fill = Year), position = "identity", bins = 25, alpha = 0.4)
+  # zero heavy - especially in 2021
+```
+
+### O.lig ratio > 0 Sites
+```{r}
+## Ratio
+hist(or.data$oligRatio) # pretty normal
+hist(or.data.or$oligRatio) # right skewed
+hist(fw.data.or2$oligRatio) # pretty normal
+
+## Counts
+hist(or.data$nOligGrowth) # right skewed
+hist(sqrt(or.data$nOligGrowth)) # more normal
+hist(log(or.data$nOligGrowth +1, base=10)) # bi-modal
+
+### Ratio by year
+ggplot(or.data, aes(x = oligRatio)) + 
+  geom_histogram(aes(color = Year, fill = Year), position = "identity", bins = 20, alpha = 0.4)
+  # lower ratios in 2021
+
+### Counts by year
+ggplot(or.data, aes(x = nTotProvised)) + 
+  geom_histogram(aes(color = Year, fill = Year), position = "identity", bins = 20, alpha = 0.4)
+  # years are pretty similar
+```
+
+### Provisioned Sites
+```{r}
+hist(zo.data$nOligGrowth) # right skewed
+hist(sqrt(zo.data$nOligGrowth)) # pretty normal
+hist(log(zo.data$nOligGrowth+1, base=10)) # left skewed
+
+### Counts by year
+ggplot(zo.data, aes(x = nTotProvised)) + 
+  geom_histogram(aes(color = Year, fill = Year), position = "identity", bins = 20, alpha = 0.4) 
+  # years are pretty similar
+```
+
+### O.lig weights 
+```{r}
+# female
+hist(fw.data$avgOligFMass_mg) # right skewed
+hist(sqrt(fw.data$avgOligFMass_mg)) # more normal
+hist(fw.data.or$avgOligFMass_mg) # Gaussian
+hist(fw.data.or2$avgOligFMass_mg) # sort of Gaussian
+hist(log(fw.data.or2$avgOligFMass_mg, base=10)) # better
+
+# Male
+hist(mw.data$avgOligMMass_mg) # fairly normal
+hist(mw.data.or$avgOligMMass_mg) # fairly normal
+
+# Larvae
+hist(lw.data$avgOligLarvMass_mg) # normal
+hist(lw.data.or$avgOligLarvMass_mg) # normal
+
+### Counts by year
+ggplot(fw.data, aes(x = avgOligFMass_mg)) + 
+  geom_histogram(aes(color = Year, fill = Year), position = "identity", bins = 20, alpha = 0.4) 
+  # only 5 females in 2020, but within the dist. of 2021 weights
+
+ggplot(mw.data, aes(x = avgOligMMass_mg)) + 
+  geom_histogram(aes(color = Year, fill = Year), position = "identity", bins = 20, alpha = 0.4) 
+  # 2021 is normally distributed. Not many males in 2020
+```
+
+## T.stansburyi
+Provisioned Sites - would only be present if there were provisioned cells
+```{r}
+# with outlier
+hist(zo.data$nTstanCells, breaks = 20) # poisson dist - HUGE outlier
+hist(sqrt(zo.data$nTstanCells)) # still skewed
+hist(log(zo.data$nTstanCells+1, base=10)) # more poisson shaped now
+
+hist(zo.data$tstanRatio) # poisson dist - outlier not as problematic
+hist(sqrt(zo.data$tstanRatio)) # 0 heavy
+hist(log(zo.data$tstanRatio+1, base=10)) # worse
+
+# without outlier
+hist(zo.data.or$nTstanCells, breaks = 10) # very zero heavy
+hist(sqrt(zo.data.or$nTstanCells)) # normalish
+hist(log(zo.data.or$nTstanCells+1,base=10)) # same as above
+
+hist(zo.data.or$tstanRatio) # very zero heavy
+hist(sqrt(zo.data.or$tstanRatio)) # sort of normal
+hist(log(zo.data.or$tstanRatio+1, base=10)) # right skewed
+
+### Counts by year
+ggplot(zo.data, aes(x = nTstanCells)) + 
+  geom_histogram(aes(color = Year, fill = Year), position = "identity", bins = 20, alpha = 0.4) 
+  # years are pretty similar
+ggplot(zo.data.or, aes(x = nTstanCells)) + 
+  geom_histogram(aes(color = Year, fill = Year), position = "identity", bins = 10, alpha = 0.4) 
+  # years are pretty similar
+```
+
+## Climate variables
+```{r}
+hist(zo.data$HLI)# zero heavy
+hist(zo.data$Ann_ppt_mm) # left skewed
+hist(zo.data$Ann_tmax_C) # left skewed
+hist(zo.data$Ann_tmean_C) # normalish
+hist(zo.data$Ann_tmin_C) # slightly right skewed
+hist(zo.data$bi_ppt_mm) # bi-modal
+hist(zo.data$bi_tmin_C) # normalish?
+hist(zo.data$bi_tmean_C) # normalish
+hist(zo.data$bi_tmax_C) # normalish
+hist(zo.data$qrt_ppt_mm) # bi-modal
+hist(zo.data$qrt_tmin_C) # normalish
+hist(zo.data$qrt_tmean_C) # normalish
+hist(zo.data$qrt_tmax_C) # normalish
+hist(zo.data$DD_accumulated) # bi-modal
+
+ggplot(zo.data, aes(x = DD_accumulated)) + 
+  geom_histogram(aes(color = Year, fill = Year), position = "identity", bins = 10, alpha = 0.4) 
+# very different by years
+```
+
+## Floral variables
+```{r}
+# stemrich
+hist(zo.data$stemrich) # right skewed
+hist(sqrt(zo.data$stemrich)) # more normal
+hist(log(zo.data$stemrich, base=10)) # normal
+
+ggplot(zo.data, aes(x = stemrich)) + 
+  geom_histogram(aes(color = Year, fill = Year), position = "identity", bins = 10, alpha = 0.4) 
+# pretty different by year
+```
+
+## Landscape variables
+Provisioned Sites
+```{r}
+# HLI
+hist(zo.data$HLI) # left skewed - hot and dry sites?
+# don't know how to transform
+hist(zo.data$HLI^2) # left skewed
+hist(abs(zo.data$HLI)) # zero heavy
+hist(sqrt(abs(zo.data$HLI))) # bimodal
+hist(log(abs(zo.data$HLI)+1,base=10))
+hist(log(abs(zo.data$HLI)+1)) # still left skewed, but not as bad
+hist(1/(abs(zo.data$HLI)))
+
+# TCC
+hist(zo.data$meanTreeCC) # zero heavy - burned sites
+hist(sqrt(zo.data$meanTreeCC)) # still zero heavy
+hist(log(zo.data$meanTreeCC, base = 10)) # Left skewed
+hist(1/(zo.data$meanTreeCC)) # right skewed
+
+# EVT
+hist(zo.data$EVT_abund) # normalish
+hist(zo.data$EVT_H) # sort of right skewed
+hist(zo.data$EVT_rich) # normalish, with many breaks
+hist(zo.data$EVT_J) # normalish
+hist(zo.data$Barren) # VERY right skewed
+hist(zo.data$Coniferous_Forest) # VERY left skewed
+hist(zo.data$Crops) # VERY right skewed
+hist(zo.data$Deciduous_Forest) # VERY right skewed
+hist(zo.data$Rangeland) # VERY right skewed
+hist(zo.data$WUI) # VERY right skewed
+```
+
+# Normality
+## O. lignaria
+### All sites
+```{r}
+# Ratios
+qqnorm(data$oligRatio) # not quite normal
+shapiro.test(data$oligRatio) # technically not sig (p = 0.07)
+
+## O.lig ratio > 0 sites
+qqnorm(or.data$oligRatio) # fairly normal
+shapiro.test(or.data$oligRatio) # not sig
+qqnorm(sqrt(or.data$oligRatio)) # more normal
+
+# counts
+qqnorm(data$nTotProvised) # not quite normal
+shapiro.test(data$nTotProvised) # sig - not normal
+qqnorm(sqrt(data$nTotProvised)) # pretty normal
+shapiro.test((sqrt(data$nTotProvised))) # not sig - normal
+
+# weights
+## 2020
+qqnorm(fw.data$avgOligFMass_mg) # too few obs
+qqnorm(mw.data$avgOligMMass_mg) # normal
+qqnorm(lw.data$avgOligLarvMass_mg) # normal
+```
+### Provisioned sites
+```{r}
+# Ratios
+qqnorm(zo.data$oligRatio) # pretty normal
+shapiro.test(zo.data$oligRatio) # not sig
+
+## O.lig ratio > 0 sites
+qqnorm(zo.data$oligRatio) # fairly normal
+shapiro.test(zo.data$oligRatio) # not sig
+
+# counts
+qqnorm(zo.data$nTotProvised) # not quite normal
+shapiro.test(zo.data$nTotProvised) # sig - not normal
+qqnorm(sqrt(zo.data$nTotProvised)) # sort of normal
+shapiro.test((sqrt(zo.data$nTotProvised))) # not sig - normal
+```
+### O.lig ratio > 0 Sites
+```{r}
+# Ratios
+qqnorm(or.data$oligRatio) # fairly normal
+qqnorm(sqrt(or.data$oligRatio)) # more normal
+qqnorm(log(or.data$oligRatio+1, base=10)) # sort of normal
+
+## Counts
+qqnorm(or.data$nOligGrowth) # wonky
+qqnorm(sqrt(or.data$nOligGrowth)) # sort of normal?
+shapiro.test(sqrt(or.data$nOligGrowth)) # not sig
+qqnorm(log(or.data$nOligGrowth +1, base=10)) # eehhhh
+```
+
+## T. stansburyi data
+### All sites
+```{r}
+## with outlier
+qqnorm(data$nTstanCells) # not normal - outlier and zero heavy
+qqnorm(sqrt(data$nTstanCells)) # still zero heavy
+qqnorm(log(data$nTstanCells+1,base = 10)) # still zero heavy
+
+qqnorm(data$tstanRatio) # not normal - outlier and zero heavy
+qqnorm(sqrt(data$tstanRatio)) # still zero heavy
+qqnorm(log(data$tstanRatio+1,base = 10)) # still zero heavy
+
+## without outlier
+qqnorm(zo.data.or$nTstanCells) # not normal - outlier and zero heavy
+qqnorm(sqrt(zo.data.or$nTstanCells)) # still zero heavy
+qqnorm(log(zo.data.or$nTstanCells+1,base = 10)) # still zero heavy
+
+qqnorm(zo.data.or$tstanRatio) # not normal - outlier and zero heavy
+qqnorm(sqrt(zo.data.or$tstanRatio)) # still zero heavy
+qqnorm(log(zo.data.or$tstanRatio+1,base = 10)) # still zero heavy
+```
+
+### Provisioned sites
+```{r}
+qqnorm(zo.data$nTstanCells) # huge outlier
+qqnorm(sqrt(zo.data$nTstanCells)) # huge outlier
+qqnorm(log(zo.data$nTstanCells+1,base = 10)) # still zero heavy
+
+qqnorm(zo.data$tstanRatio) # not normal - outlier and zero heavy
+qqnorm(sqrt(zo.data$tstanRatio)) # still zero heavy
+qqnorm(log(zo.data$tstanRatio+1,base = 10)) # still zero heavy
+shapiro.test(log(zo.data$tstanRatio+1,base = 10)) # sig
+```
+### O.lig ratio > 0 Sites
+```{r}
+# Ratios
+qqnorm(or.data$nTstanCells) # huge outlier
+qqnorm(sqrt(or.data$nTstanCells)) # huge outlier
+qqnorm(log(or.data$nTstanCells+1,base = 10)) # still zero heavy
+
+qqnorm(or.data$tstanRatio) # not normal - outlier and zero heavy
+shapiro.test(or.data$tstanRatio) #  sig
+qqnorm(sqrt(or.data$tstanRatio)) # still zero heavy
+shapiro.test(sqrt(or.data$tstanRatio)) # not sig
+qqnorm(log(or.data$tstanRatio+1,base = 10)) # still zero heavy
+shapiro.test(log(or.data$tstanRatio+1,base = 10)) # sig
+
+## Counts
+qqnorm(or.data$nTstanCells) # wonky
+qqnorm(sqrt(or.data$nTstanCells)) # wonky
+shapiro.test(sqrt(or.data$nTstanCells)) # sig
+qqnorm(log(or.data$nTstanCells +1, base=10)) # zero heavy, then normal?
+shapiro.test(log(or.data$nTstanCells+1, base=10)) # p = 0.05.
+```
+
+## Climate variables
+```{r}
+qqnorm(zo.data$HLI)# zero heavy
+qqnorm(zo.data$Ann_ppt_mm) # left skewed
+qqnorm(zo.data$Ann_tmax_C) # left skewed
+qqnorm(zo.data$Ann_tmean_C) # normalish
+qqnorm(zo.data$Ann_tmin_C) # slightly right skewed
+qqnorm(zo.data$bi_ppt_mm) # bi-modal
+qqnorm(zo.data$bi_tmin_C) # normalish?
+qqnorm(zo.data$bi_tmean_C) # normalish
+qqnorm(zo.data$bi_tmax_C) # normalish
+qqnorm(zo.data$qrt_ppt_mm) # bi-modal
+qqnorm(zo.data$qrt_tmin_C) # normalish
+qqnorm(zo.data$qrt_tmean_C) # normalish
+qqnorm(zo.data$qrt_tmax_C) # normalish
+qqnorm(zo.data$DD_accumulated) # bi-modal
+```
+
+## Floral & Tree variables
+```{r}
+# stemrich
+qqnorm(zo.data$stemrich) # fairly normal
+
+# TCC
+qqnorm(zo.data$meanTreeCC) # zero heavy - burned sites
+qqnorm(sqrt(zo.data$meanTreeCC)) # still zero heavy
+qqnorm(log(zo.data$meanTreeCC, base = 10)) # Left skewed
+qqnorm(1/(zo.data$meanTreeCC)) # right skewed
+```
+
+## Landscape variables
+Provisioned Sites
+```{r}
+# HLI
+qqnorm(zo.data$HLI) # left skewed - hot and dry sites?
+# don't know how to transform
+qqnorm(zo.data$HLI^2) # left skewed
+qqnorm(abs(zo.data$HLI)) # zero heavy
+qqnorm(sqrt(abs(zo.data$HLI))) # bimodal
+qqnorm(log(abs(zo.data$HLI)+1,base=10))
+qqnorm(log(abs(zo.data$HLI)+1)) # still left skewed, but not as bad
+qqnorm(1/(abs(zo.data$HLI)))
+
+# EVT
+qqnorm(zo.data$EVT_abund) # normalish
+qqnorm(zo.data$EVT_H) # sort of right skewed
+qqnorm(zo.data$EVT_rich) # normalish, with many breaks
+qqnorm(zo.data$EVT_J) # normalish
+qqnorm(zo.data$Barren) # VERY right skewed
+qqnorm(zo.data$Coniferous_Forest) # VERY left skewed
+qqnorm(zo.data$Crops) # VERY right skewed
+qqnorm(zo.data$Deciduous_Forest) # VERY right skewed
+qqnorm(zo.data$Rangeland) # VERY right skewed
+qqnorm(zo.data$WUI) # VERY right skewed
+```
+
+# Boxplots
+```{r}
+boxplot(data$HLI)
+boxplot(data$nTstanCells) # HUGE outlier
+boxplot(data$nParasite)
+boxplot(data$avgOligFMass_mg)
+boxplot(data$avgOligMMass_mg)
+boxplot(data$avgOligFMass_mg)
+boxplot(data$avgOligLarvMass_mg) # outlier, but probably more useful than pupae mass
+boxplot(data$oligRatio) # outliers (no bees)
+boxplot(data$tstanRatio) # outlier
+boxplot(data$monoRatio)
+boxplot(data$Dead_BA_ha)
+boxplot(data$Live_BA_ha)
+boxplot(data$meanTreeCC)
+boxplot(data$stemdiv)
+boxplot(data$stemrich)
+boxplot(data$stemabun)
+```
+
+# Identifying outliers
+```{r}
+# Outliers:
+## nTstan/TstanRatio
+
+ggplot(data=data, aes(x=Habitat, y=nTstanCells, label = Site, color=Habitat))+
+  geom_boxplot()+
+  geom_text(check_overlap = TRUE, position=position_jitter(width=0.01))+
+  theme(legend.position="right") # H18 - TON of T. stan
+
+ggplot(data=zo.data.or, aes(x=WUI, y=nTstanCells, label = Site))+
+  geom_boxplot()+
+  geom_text(check_overlap = TRUE, position=position_jitter(width=0.01))+
+  theme(legend.position="right") # H18 - TON of T. stan
+
+ggplot(data=data, aes(x=Habitat, y=tstanRatio, label = Site, color=Habitat))+
+  geom_boxplot()+
+  geom_text(check_overlap = TRUE, position=position_jitter(width=0.01))+
+  theme(legend.position="right") # H18 not as extreme
+
+ggplot(data=data, aes(x=Habitat, y=avgOligLarvMass_mg, label = Site, color=Habitat))+
+  geom_boxplot()+
+  geom_text(check_overlap = TRUE, position=position_jitter(width=0.01))+
+  theme(legend.position="right") # 2 sites with no larvae (H03 & T02)
+
+ggplot(data=data, aes(x=Habitat, y=oligRatio, label = Site, color=Habitat))+
+  geom_boxplot()+
+  geom_text(check_overlap = TRUE, position=position_jitter(width=0.01))+
+  theme(legend.position="right") # H03 - no Olig
+```
+
+# Zero inflation?
+## All sites
+```{r}
+# count data (that you might be using)
+100*sum(data$nTotProvised == 0)/nrow(data) # 17.9%
+100*sum(data$nTstanCells == 0)/nrow(data) # 38.5% - High!
+
+# ratio data
+100*sum(data$oligRatio == 0)/nrow(data) # 20.5%
+100*sum(data$oligFRatio == 0)/nrow(data) # 46.1% - 2020 probably skewing data
+100*sum(data$oligFRatio == 0 & data$Year == 2021)/nrow(data) # 20.5%  - better
+100*sum(data$tstanRatio == 0)/nrow(data) # 38.5% - High
+```
+
+## Provisioned sites
+```{r}
+# count data 
+100*sum(zo.data$nTstanCells == 0)/nrow(zo.data) # 25 % 
+### not too bad, as far as zero inflation, goes
+
+# ratio data
+100*sum(zo.data$oligRatio == 0)/nrow(zo.data) # 3.1%
+100*sum(zo.data$oligFRatio == 0)/nrow(zo.data) # 34.4% - 2020 probably skewing data
+100*sum(zo.data$oligFRatio == 0 & zo.data$Year == 2021)/nrow(zo.data) # 6.2%  - Way better!
+100*sum(zo.data$tstanRatio == 0)/nrow(zo.data) # 25%
+```
+Not too bad, as far as zero inflation goes
+
+# Difference between years
+## O. lignaria
+### Plots
+```{r}
+## Count
+boxplot(nTotProvised ~ Year, data = zo.data) # not that diff
+boxplot(nOligGrowth ~ Year, data = zo.data) # no diff
+boxplot(nOligLarve ~ Year, data=zo.data) # much more in 2020
+boxplot(nOligF ~ Year, data = zo.data) # much more in 2021
+boxplot(nOligM ~ Year, data = zo.data) # much more in 2021
+
+## Mass
+boxplot(avgOligMass_mg ~ Year, data = zo.data) # higher in 2021
+boxplot(avgOligFMass_mg ~ Year, data = zo.data) # higher in 2021
+boxplot(avgOligMMass_mg ~ Year, data = zo.data) # higher in 2021
+
+## Ratio
+boxplot(oligRatio ~ Year, data = zo.data) # similar
+boxplot(monoRatio ~ Year, data = zo.data) # similar
+```
+Mass is probably significantly different - different collection methods
+
+### Analyses
+```{r}
+## Count
+bmod1<-aov(nTotProvised ~ Year, data = zo.data) 
+bmod1<-tidy(bmod1) # no diff
+kable(bmod1, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+bmod2<-aov(nOligGrowth ~ Year, data = zo.data)
+bmod2<-tidy(bmod2) # no diff
+kable(bmod2, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+bmod3<-aov(nOligLarve ~ Year, data=zo.data) 
+bmod3<-tidy(bmod3) # very diff
+kable(bmod3, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+bmod4<-aov(nOligF ~ Year, data = zo.data) 
+bmod4<-tidy(bmod4) # very diff
+kable(bmod4, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+bmod5<-aov(nOligM ~ Year, data = zo.data) 
+bmod5<-tidy(bmod5) # no diff
+kable(bmod5, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+## Mass
+bmod6<-aov(avgOligMass_mg ~ Year, data = zo.data) 
+bmod6<-tidy(bmod6) # diff
+kable(bmod6, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+bmod7<-aov(avgOligFMass_mg ~ Year, data = zo.data) 
+bmod7<-tidy(bmod7) # diff
+kable(bmod7, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+bmod8<-aov(avgOligMMass_mg ~ Year, data = zo.data) 
+bmod8<-tidy(bmod8) # marginally diff (p = 0.09)
+kable(bmod8, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+## Ratio
+bmod9<-aov(oligRatio ~ Year, data = zo.data) 
+bmod9<-tidy(bmod9) # no diff
+kable(bmod9, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+bmod10<-aov(monoRatio ~ Year, data = zo.data) 
+bmod10<-tidy(bmod10) # no diff
+kable(bmod10, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+```
+Significant differences: Larvae count, F count, brood mass, F mass, M mass is marginal
+
+## T. stansburyi & Monodonts
+### Plots
+```{r}
+## Count
+boxplot(nTstanCells ~ Year, data = zo.data) # no diff, other than outlier
+boxplot(nTstanCells ~ Year, data = zo.data.or) # no diff
+boxplot(nParasite ~ Year, data = zo.data) # no diff
+
+## Ratio
+boxplot(tstanRatio ~ Year, data = zo.data) # similar
+boxplot(tstanRatio ~ Year, data = zo.data.or) # similar
+boxplot(monoRatio ~ Habitat, data = zo.data) # similar
+```
+
+### Analyses
+```{r}
+tmod1<-aov(nTstanCells ~ Year, data = zo.data)
+tmod1<-tidy(tmod1) # no diff
+kable(tmod1, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+tmod2<-aov(nTstanCells ~ Year, data = zo.data.or) 
+tmod2<-tidy(tmod2) # no diff
+kable(tmod2, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+tmod3<-aov(tstanRatio ~ Year, data = zo.data.or) 
+tmod3<-tidy(tmod3) # no diff
+kable(tmod3, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+```
+No differences
+
+## Climate variables
+### Plots
+```{r}
+boxplot(HLI ~ Year, data=zo.data) # no diff
+boxplot(Ann_ppt_mm ~ Year, data=zo.data) # no diff
+boxplot(Ann_tmax_C ~ Year, data=zo.data) # no diff
+boxplot(Ann_tmean_C ~ Year, data=zo.data) # no diff
+boxplot(Ann_tmin_C ~ Year, data=zo.data) # no diff
+
+boxplot(bi_ppt_mm ~ Year, data = zo.data) # diff
+boxplot(bi_tmin_C ~ Year, data = zo.data) # diff
+boxplot(bi_tmean_C ~ Year, data = zo.data) # diff
+boxplot(bi_tmax_C ~ Year, data = zo.data) # diff
+boxplot(qrt_ppt_mm ~ Year, data = zo.data) # diff
+boxplot(qrt_tmin_C ~ Year, data = zo.data) # no diff
+boxplot(qrt_tmean_C ~ Year, data = zo.data) # no diff
+boxplot(qrt_tmax_C ~ Year, data = zo.data) # diff
+boxplot(DD_accumulated ~ Year, data=zo.data) # diff
+```
+Precipitation and temperatures from Jan-Jun will probably be different. ADD is also MUCH higher in 2020 - boxes were left out longer and temperatures were higher in 2020
+
+### Analyses
+```{r}
+cmod1<-aov(HLI ~ Year, data=zo.data) 
+cmod1<-tidy(cmod1) # no diff
+kable(cmod1, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+cmod2<-aov(Ann_ppt_mm ~ Year, data=zo.data) 
+cmod2<-tidy(cmod2) # no diff
+kable(cmod2, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+cmod3<-aov(Ann_tmax_C ~ Year, data=zo.data) 
+cmod3<-tidy(cmod3) # no diff
+kable(cmod3, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+cmod4<-aov(Ann_tmean_C ~ Year, data=zo.data) 
+cmod4<-tidy(cmod4) # no diff
+kable(cmod4, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+cmod5<-aov(Ann_tmin_C ~ Year, data=zo.data) 
+cmod5<-tidy(cmod5) # no diff
+kable(cmod5, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+cmod6<-aov(bi_ppt_mm ~ Year, data = zo.data) 
+cmod6<-tidy(cmod6) # diff
+kable(cmod6, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+cmod7<-aov(bi_tmin_C ~ Year, data = zo.data) 
+cmod7<-tidy(cmod7) # diff
+kable(cmod7, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+cmod8<-aov(bi_tmean_C ~ Year, data = zo.data) 
+cmod8<-tidy(cmod8) # diff
+kable(cmod8, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+cmod9<-aov(bi_tmax_C ~ Year, data = zo.data) 
+cmod9<-tidy(cmod9) # diff
+kable(cmod9, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+cmod10<-aov(qrt_ppt_mm ~ Year, data = zo.data) 
+cmod10<-tidy(cmod10) # diff
+kable(cmod10, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+cmod11<-aov(qrt_tmin_C ~ Year, data = zo.data) 
+cmod11<-tidy(cmod11) # no diff
+kable(cmod11, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+cmod12<-aov(qrt_tmean_C ~ Year, data = zo.data) 
+cmod12<-tidy(cmod12) # no diff
+kable(cmod12, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+cmod13<-aov(qrt_tmax_C ~ Year, data = zo.data) 
+cmod13<-tidy(cmod13) # diff
+kable(cmod13, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+cmod14<-aov(DD_accumulated ~ Year, data=zo.data) 
+cmod14<-tidy(cmod14) # diff
+kable(cmod14, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+```
+Significant differences: bi_ppt_mm, bi_tmin_C, bi_tmean_C, bi_tmax_C, qrt_ppt_mm, qrt_tmax_C, and DD_accumulated
+
+## Floral variables
+### Plots
+```{r}
+boxplot(stemdiv ~ Year, data=zo.data) # higher in 2020
+boxplot(stemrich ~ Year, data=zo.data) # higher in 2020
+```
+
+### Analysis
+```{r}
+fmod1<-aov(stemdiv ~ Year, data=zo.data) 
+fmod1<-tidy(fmod1) # diff
+kable(fmod1, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+fmod2<-aov(stemrich ~ Year, data=zo.data)
+fmod2<-tidy(fmod2) # diff
+kable(fmod2, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+```
+Significant vars: stemdiv, and stemrich
+
+## Trees
+### Plots
+```{r}
+boxplot(meanTreeCC ~ Year, data=zo.data) # no diff
+boxplot(Dead_BA_ha ~ Year, data=zo.data) # slight diff in median, probably not sig
+boxplot(Live_BA_ha ~ Year, data=zo.data) # no diff
+```
+
+### Analysis
+```{r}
+tmod1<-aov(meanTreeCC ~ Year, data=zo.data) 
+tmod1<-tidy(tmod1) # no diff
+kable(tmod1, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+tmod2<-aov(Dead_BA_ha ~ Year, data=zo.data) 
+tmod2<-tidy(tmod2) # no diff
+kable(tmod2, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+tmod3<-aov(Live_BA_ha ~ Year, data=zo.data) 
+tmod3<-tidy(tmod3) # no diff
+kable(tmod3, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+```
+No significant differences
+
+## Landscape variables
+### Plots
+```{r}
+boxplot(EVT_abund ~ Year, data=zo.data) # higher in 2020
+boxplot(EVT_H ~ Year, data=zo.data) # higher in 2021
+boxplot(EVT_J ~ Year, data=zo.data) # slightly higher in 2020
+boxplot(Barren ~ Year, data=zo.data) # somewhat higher in 2021
+boxplot(Coniferous_Forest ~ Year, data=zo.data) # no diff
+boxplot(Crops ~ Year, data=zo.data) # no diff
+boxplot(Deciduous_Forest ~ Year, data=zo.data) # no diff
+boxplot(Rangeland ~ Year, data=zo.data) # no diff
+boxplot(WUI ~ Year, data=zo.data) # higher in 2021
+```
+Probably some differences in EVT_abudn, EVT_H, EVT_J, Barren, and WUI
+
+### Analysis
+```{r}
+lmod1<-aov(EVT_abund ~ Year, data=zo.data) 
+lmod1<-tidy(lmod1) # diff
+kable(lmod1, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+lmod2<-aov(EVT_H ~ Year, data=zo.data) 
+lmod2<-tidy(lmod2) # marginally diff
+kable(lmod2, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+lmod3<-aov(EVT_J ~ Year, data=zo.data) 
+lmod3<-tidy(lmod3) # marginally diff
+kable(lmod3, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+lmod4<-aov(Barren ~ Year, data=zo.data) 
+lmod4<-tidy(lmod4) # marginally diff
+kable(lmod4, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+lmod5<-aov(Coniferous_Forest ~ Year, data=zo.data) 
+lmod5<-tidy(lmod5) # no diff
+kable(lmod5, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+lmod6<-aov(Crops ~ Year, data=zo.data) 
+lmod6<-tidy(lmod6) # no diff
+kable(lmod6, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+lmod7<-aov(Deciduous_Forest ~ Year, data=zo.data) 
+lmod7<-tidy(lmod7) # no diff
+kable(lmod7, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+lmod8<-aov(Rangeland ~ Year, data=zo.data) 
+lmod8<-tidy(lmod8) # no diff
+kable(lmod8, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+lmod9<-aov(WUI ~ Year, data=zo.data) 
+lmod9<-tidy(lmod9) # marginally diff
+kable(lmod9, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+```
+Significant vars: EVT_abund
+Marginal sig vars: EVT_H, EVT_J, Barren, WUI
+
+## Sum stats
+For significantly different variables between years
+### O. lignaria
+Significant differences: Larvae count, F count, F mass, M mass is marginal
+```{r}
+zo.data %>% group_by(Year) %>% 
+  summarise_at(c("nOligF", "nOligLarve", "avgOligFMass_mg", "avgOligMMass_mg"), 
+                funs(mean=round(mean(.), 3), se=round(sd(.), 3))) %>% print.data.frame() 
+```
+
+### Climate
+Significant differences: bi_ppt_mm, bi_tmin_C, bi_tmean_C, bi_tmax_C, and DD_accumulated
+```{r}
+# Field days between years
+zo.data %>% group_by(Year) %>% 
+  summarise_at(c("bi_ppt_mm", "bi_tmin_C", "bi_tmean_C", "bi_tmax_C", "FieldDay", "DD_accumulated"), 
+                funs(mean=round(mean(.), 3), se=round(sd(.), 3))) %>% print.data.frame() 
+```
+
+### Floral
+Significant vars: stemdiv, and stemrich
+```{r}
+zo.data %>% group_by(Year) %>% 
+  summarise_at(c("stemdiv", "stemrich"), 
+               funs(mean=round(mean(.), 3), se=round(sd(.), 3))) %>% print.data.frame() 
+```
+
+### Landscape
+Significant vars: EVT_abund
+Marginal sig vars: EVT_H, EVT_J, Barren, WUI
+```{r}
+zo.data %>% group_by(Year) %>% 
+  summarise_at(c("EVT_abund", "EVT_H", "EVT_J", "Barren", "WUI"), 
+               funs(mean=round(mean(.), 3), se=round(sd(.), 3))) %>% print.data.frame() 
+```
+
+# Differences by habitat
+## Data prep
+```{r}
+habdata <- zo.data[,-c(3)]
+summary(habdata)
+```
+
+## O. lignaria
+### Plots
+```{r}
+## Count
+boxplot(nTotProvised ~ Habitat, data = zo.data) # more in treated
+boxplot(nOligGrowth ~ Habitat, data = zo.data) # no diff in medians
+boxplot(nOligLarve ~ Habitat, data=zo.data) # slightly diff
+boxplot(nOligF ~ Habitat, data = zo.data) # slightly diff
+boxplot(nOligM ~ Habitat, data = zo.data) # no diff
+
+## Mass
+boxplot(avgOligMass_mg ~ Habitat, data = zo.data) # diff in variance
+boxplot(avgOligFMass_mg ~ Habitat, data = zo.data) # diff variance
+boxplot(avgOligMMass_mg ~ Habitat, data = zo.data) # diff variance
+
+## Ratio
+boxplot(oligRatio ~ Habitat, data = zo.data) # similar
+```
+
+#### Count distribution
+```{r}
+ggplot(habdata, aes(nOligGrowth, fill = Habitat)) + geom_histogram(binwidth = 5) + facet_grid(Habitat ~ 
+    ., margins = TRUE)
+
+with(habdata, tapply(nOligGrowth, Habitat, function(x) {
+    sprintf("M (SD) = %1.2f (%1.2f)", mean(x), sd(x))
+}))
+```
+
+### *Analysis*
+Going with lm, but might not be best fit (normality?)
+Note: anova might not be best fit, because data is not balanced
+```{r}
+x = colnames(habdata[,-c(2)]) # make list of response vars names
+
+#y = sort(unique(unlist(lapply(habdata, names))))
+#i = sapply(habdata, "[", y)
+
+olig.hab.out <- unlist(lapply(1, function(n) combn(x, 1, FUN=function(row) paste0(paste0(row, collapse = "+"), " ~ Habitat"))))
+olig.hab.out
+
+#To have the regression coefficients
+olig.hab.mods = bind_rows(lapply(olig.hab.out, function(frml) {
+  a = tidy(lm(frml, na.action=na.exclude, data = habdata[(. != Inf & is.na(.) == FALSE)])) # different from na.exclude
+  a$frml = frml
+  return(a)
+}))
+
+# check modes
+olig.hab.mod.chk = bind_rows(lapply(olig.hab.out, function(frml) {
+  b = plot(lm(frml, data=olig.habdata))
+  b$frml= frml
+  return(b)
+}))
+
+head(olig.hab.mods)
+```
+This doesn't work - have to overcome NA's in y variables
+
+### *Analyses -long way*
+```{r}
+## Count
+bmod1<-aov(nTotProvised ~ Habitat, data = zo.data) 
+bmod1<-tidy(bmod1) # no diff
+kable(bmod1, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+bmod2<-aov(nOligGrowth ~ Habitat, data = zo.data)
+bmod2<-tidy(bmod2) # no diff
+kable(bmod2, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+bmod3<-aov(nOligLarve ~ Habitat, data=zo.data) 
+bmod3<-tidy(bmod3) # very diff
+kable(bmod3, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+bmod4<-aov(nOligF ~ Habitat, data = zo.data) 
+bmod4<-tidy(bmod4) # very diff
+kable(bmod4, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+bmod5<-aov(nOligM ~ Habitat, data = zo.data) 
+bmod5<-tidy(bmod5) # no diff
+kable(bmod5, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+## Mass
+bmod6<-aov(avgOligMass_mg ~ Habitat, data = zo.data) 
+bmod6<-tidy(bmod6) # diff
+kable(bmod6, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+bmod7<-aov(avgOligFMass_mg ~ Habitat, data = zo.data) 
+bmod7<-tidy(bmod7) # diff
+kable(bmod7, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+bmod8<-aov(avgOligMMass_mg ~ Habitat, data = zo.data) 
+bmod8<-tidy(bmod8) # marginally diff (p = 0.09)
+kable(bmod8, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+
+## Ratio
+bmod9<-aov(oligRatio ~ Habitat, data = zo.data) 
+bmod9<-tidy(bmod9) # no diff
+kable(bmod9, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+bmod10<-aov(monoRatio ~ Habitat, data = zo.data) 
+bmod10<-tidy(bmod10) # no diff
+kable(bmod10, col.names = c("Term","Df", "Sum Sq", "Mean Sq", "*t-statistic*", "*P-value*"), digits = 3 )
+```
+
+
+# How to analyze data
+https://drizopoulos.github.io/GLMMadaptive/articles/ZeroInflated_and_TwoPart_Models.html#two-parthurdle-poisson-mixed-effects-model
+
+* Weight data
+  ** is continuous data with lots of zeros, or semi-continuous data. Therefore, a *Two-Part Mixed Effects Model for Semi-Continuous Data* might be appropriate
+    *** this is a two step model: 
+      **** 1) uses a logistic regression to determine if the outcome is zero or not (dichotomous) 
+      **** 2) if data is not zero, uses a standard linear mixed model 
+  ** scratch that - it doesn't make since to include zeros for weight data, only count data. Therefore, just do a glm.
+  *** Note: Do NOT want to use a Poisson dist (only useful for integer data)
+
+* Count data
+  ** is discrete data and we want to know the distribution. Commonly, a Poisson distribution (generalized linear model family) is used for count data.
+  ** However, our data is very zero heavy 
+  ** Can use a *Zero-inflated Poisson Mixed Effects Model*
+    *** user has the option to leave **zi_random** set to **NULL**, in which case for the zero-part we have a logistic regression with only fixed effects and no random effects
+  ** Another option is the *Two-Part/Hurdle Poisson Mixed Effects Model**
+    *** similar to the semi-continuous data data (above) but for discrete data (i.e. counts) instead of continuous data
+    *** 1) uses logistic regression to determine if data is zero or not
+    *** 2) if value is positive, used a truncated zero-inflated Poisson mixed effects model
+
+## Q1 
+* T. stansburyi abundance by landscape, climate, and floral variables
+  ** What variables to include?
+  ** Predictor vars to include in stp-wise model: https://journals.lww.com/picp/fulltext/2017/08030/Common_pitfalls_in_statistical_analysis__Logistic.9.aspx
+    1) What vars have a sig, univariate relationship (P < 0.1)
+    2) Avoid highly correlated variables
+
+## Q2 
+* T. stansburyi presence depends on O.lig provisions - 
+  ** Omit sites that don't have provisions
+  ** Note: different than sites with no O.lig ratios
+    *** 1 site in 2021 was completely parasitized by T. stan
+* 2020
+  ** ntstanCells
+    *** is zero influenced (zi), has a HUGE outlier, and not normal
+      **** log + 1 transformation seems to help, but is still zero heavy, then has a normal dist 
+      **** ZINB or ZIP might also be required
+        ***** Or can we just do a ZINB/ZIP without transforming?
+  ** nstan ratio
+    *** not zi, but is zero heavy and not normal
+    *** transformations don't seem to help
+      ***** glm with poisson dist?
+* 2021
+  ** ntstanCells
+    *** not zi, but is zero heavy and not normal
+    *** sqrt and log+1 transformations help
+      **** lm/glm
+  ** tstan ratio
+    *** not zi, but is zero heavy and not normal
+    *** sqrt transformation helps
+      **** lm/glm
+

@@ -1,0 +1,477 @@
+Date,Recorder,Site,Habitat,Plot,CODE,Family,Genus,Species,Species2,FuncGroup,NumBlooms,NumStems,Pollen_Collected,Notes,NewNote_230918,Bloom_Time
+7/16/2020,JMD,C03,Control,A10,Unk Art,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,4,No,,Can probably cut,Aug-Oct
+7/16/2020,JMD,C03,Control,A5,LILY,LILIACEAE,Unk,Unk,Unk Unk,Forb,0,1,No,,,0
+7/16/2020,JMD,C03,Control,A5,MELA3,BORAGINACEAE,Mertensia,Lanceolata,Mertensia Lanceolata,Forb,0,6,No,22 seed heads,Identified to Mertensia lanseolata,May-June
+7/16/2020,JMD,C03,Control,A5,Unk Art,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,4,No,,Can probably cut,Aug-Oct
+7/16/2020,JMD,C03,Control,A5,YUGL,AGAVACEAE,Yucca,glauca,Yucca glauca,Shrub,0,1,No,part flowering,,May-July
+7/16/2020,JMD,C03,Control,B10,ARMO4,ASTERACEAE,Arnica,mollis,Arnica mollis,Forb,0,3,No,"browsed. Was Hairy opp, changed to UnkHariy Opp",Identified to ARMO4,July-Sept
+7/16/2020,JMD,C03,Control,B10,CANU4,ASTERACEAE,Carduus,nutans,Carduus nutans,Forb,4,3,C03.1,Most likely Carduus nutans. Changed from CITR to CANU4,,June-Oct
+7/16/2020,JMD,C03,Control,B10,MELA3,BORAGINACEAE,Mertensia,Lanceolata,Mertensia Lanceolata,Forb,0,4,No,12 seed heads. Was Simp. Alt - changed to UnkSimp alt,,May-June
+7/16/2020,JMD,C03,Control,B10,Unk Art,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,9,No,,Can probably cut,Aug-Oct
+7/16/2020,JMD,C03,Control,B5,NA,NA,NA,NA,NA,NA,NA,NA,NA,,,0
+7/16/2020,JMD,C03,Control,C10,ARFU3,ASTERACEAE,Arnica,fulgens,Arnica fulgens,Forb,0,1,No,Arnica fulgens? ARFU3,,May-Aug
+7/16/2020,JMD,C03,Control,C10,OPUNT,CACTACEAE,Opuntia,spp.,Opuntia spp.,Shrub,0,5,No,,,May-Aug
+7/16/2020,JMD,C03,Control,C10,Unk Art,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,1,No,,Can probably cut,Aug-Oct
+7/16/2020,JMD,C03,Control,C10,UnkTri Forb,UNK,Unk,Unk81,Unk Unk81,Forb,0,3,No,"Was Tri Forb, changed to UnkTri Forb",,Just leaves
+7/16/2020,JMD,C03,Control,C5,ARFU3,ASTERACEAE,Arnica,fulgens,Arnica fulgens,Forb,3,12,No,"new seed heads, prob. more stems but too seenesed to accurately measure. Arnica fulgens? ARFU3",,May-Aug
+7/16/2020,JMD,C03,Control,D10,ARMO4,ASTERACEAE,Arnica,mollis,Arnica mollis,Forb,0,2,No,"Not quite flowering. Was Hairy opp, changed to UnkHariy opp",,July-Sept
+7/16/2020,JMD,C03,Control,D10,MELA3,BORAGINACEAE,Mertensia,Lanceolata,Mertensia Lanceolata,Forb,0,1,No,"past flowering - 20 seed heads. Was Simp. Alt, changed to UnkSimp. Alt",,May-June
+7/16/2020,JMD,C03,Control,D5,CIRSI,ASTERACEAE,Cirsium,spp.,Cirsium spp.,Forb,0,1,No,"Was Cirisium, changed to CIRSI",,June-Sept
+7/16/2020,JMD,C03,Control,D5,LILY,LILIACEAE,Unk,Unk,Unk Unk,Forb,0,1,No,,,0
+7/16/2020,JMD,C03,Control,D5,Unk Art,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,4,No,,Can probably cut,Aug-Oct
+7/19/2020,JMD,C05,Control,A10,NA,NA,NA,NA,NA,NA,NA,NA,NA,,,0
+7/19/2020,JMD,C05,Control,A5,ERIOG,POLYGONACEAE,Eriogonum,spp.,Eriogonum spp.,Shrub,0,1,No,Was ERIOG1. Changed to ERIOG for now,,May-June
+7/19/2020,JMD,C05,Control,A5,PHLOX,POLEMONIACEAE,Phlox,spp.,Phlox spp.,Forb,0,1,No,,Phlox hoodii?,April-Aug
+7/19/2020,JMD,C05,Control,A5,SYAL,CAPRIFOLIACEAE,Symphoricarpos,albus,Symphoricarpos albus,Shrub,0,2,No,,,June-July
+7/19/2020,JMD,C05,Control,B10,NA,NA,NA,NA,NA,NA,NA,NA,NA,,,0
+7/19/2020,JMD,C05,Control,B5,NA,NA,NA,NA,NA,NA,NA,NA,NA,,,0
+7/19/2020,JMD,C05,Control,C10,SYAL,CAPRIFOLIACEAE,Symphoricarpos,albus,Symphoricarpos albus,Shrub,0,1,No,,,June-July
+7/19/2020,JMD,C05,Control,C5,ERIOG,POLYGONACEAE,Eriogonum,spp.,Eriogonum spp.,Shrub,0,1,No,Was ERIOG1. Changed to ERIOG for now,,May-June
+7/19/2020,JMD,C05,Control,C5,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,5,No,5 seed heads,,May-Sept
+7/19/2020,JMD,C05,Control,C5,POTEN,ROSACEAE,Potentilla,spp.,Potentilla spp.,Forb,0,6,No,,,May-June
+7/19/2020,JMD,C05,Control,D10,JAAM,HYDRANGEACEAE,Jamesia,americana,Jamesia americana,Shrub,95,9,C05.2,,,May-July
+7/19/2020,JMD,C05,Control,D5,JAAM,HYDRANGEACEAE,Jamesia,americana,Jamesia americana,Shrub,53,12,C05.1,,,May-July
+7/29/2020,JMD,C06,Control,A10,NA,NA,NA,NA,NA,NA,NA,NA,NA,,,0
+7/29/2020,JMD,C06,Control,A5,ARFR,ASTERACEAE,Artemisia,absinthium,Artemisia absinthium,Forb,0,0,No,"Not yet blooming, b shrubs x 125 stems",,July-Oct
+7/29/2020,JMD,C06,Control,A5,ERIGE2,ASTERACEAE,Erigeron,spp.,Erigeron spp.,Forb,0,4,No,part  flowering. Was Simple Aster change to UnkSimple Aster,Identified to Erigeron spp,May-June
+7/29/2020,JMD,C06,Control,A5,ERIOG,POLYGONACEAE,Eriogonum,spp.,Eriogonum spp.,Shrub,0,1,No,"just basal rosett. Was ERCO, change to ERIOG",,May-June
+7/29/2020,JMD,C06,Control,A5,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,0,5,No,Not yet blooming,,July-Oct
+7/29/2020,JMD,C06,Control,A5,LEPID,BRASSICACEAE,Lepidium,spp.,Lepidium spp.,Forb,0,4,No,seeding. Was Weed3 change to UnkWeed3,Identified to Lepidium spp.,May-June
+7/29/2020,JMD,C06,Control,B10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,1,43,C06.4,13 F just mireed,,July-Oct
+7/29/2020,JMD,C06,Control,B10,Unk2,UNK,Unk,Unk31,Unk Unk31,Forb,0,12,No,,Can probably cut,Just leaves
+7/29/2020,JMD,C06,Control,B10,UnkLeaf2,UNK,Unk,Unk56,Unk Unk56,Forb,0,2,No,,Can probably cut,Just leaves
+7/29/2020,JMD,C06,Control,B5,NA,NA,NA,NA,NA,NA,NA,NA,NA,,,0
+7/29/2020,JMD,C06,Control,C10,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,42,No,,,Aug-Oct
+7/29/2020,JMD,C06,Control,C10,ARFR,ASTERACEAE,Artemisia,absinthium,Artemisia absinthium,Forb,0,41,No,(1 shrub),,July-Oct
+7/29/2020,JMD,C06,Control,C10,GEVI2,GERANIACEAE,Geranium,viscosissimum,Geranium viscosissimum,Forb,0,2,No,,,June-Aug
+7/29/2020,JMD,C06,Control,C10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,4,17,C06.3,,,July-Oct
+7/29/2020,JMD,C06,Control,C5,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,8,No,,,Aug-Oct
+7/29/2020,JMD,C06,Control,C5,ERIOG,POLYGONACEAE,Eriogonum,spp.,Eriogonum spp.,Shrub,0,5,No,"Was ERCO, change to ERIOG",,May-June
+7/29/2020,JMD,C06,Control,C5,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,0,3,No,,,July-Oct
+7/29/2020,JMD,C06,Control,D10,ERIGE2,ASTERACEAE,Erigeron,spp.,Erigeron spp.,Forb,0,7,No,1 old seed head,Identified to Erigeron spp,May-June
+7/29/2020,JMD,C06,Control,D10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,0,2,No,2 old seed heads,,July-Oct
+7/29/2020,JMD,C06,Control,D10,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,19,No,~30 old seed heads,"Not a brassica - has opp leaves. Want to say penstemon, but looks very ""weak"" and almost annual like for one",May-Sept
+7/29/2020,JMD,C06,Control,D5,ARABI2,BRASSICACEAE,Arabis,spp.,Arabis spp.,Forb,0,1,No,Past,,May-July
+7/29/2020,JMD,C06,Control,D5,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,15,No,,,Aug-Oct
+7/29/2020,JMD,C06,Control,D5,ARFR,ASTERACEAE,Artemisia,absinthium,Artemisia absinthium,Forb,0,14,No,,,July-Oct
+7/29/2020,JMD,C06,Control,D5,ECVI2,CACTACEAE,Echinocereus,viridiflorus,Echinocereus viridiflorus,Shrub,0,1,No,Past,,May-July
+7/29/2020,JMD,C06,Control,D5,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,1,40,C06.6,Most (26) flowers past prime,,July-Oct
+7/29/2020,JMD,C06,Control,D5,LEPID,BRASSICACEAE,Lepidium,spp.,Lepidium spp.,Forb,0,1,No,Was Weed3. Changed to UnkWeed 3,Identified to Lepidium spp.,May-June
+7/29/2020,JMD,C06,Control,D5,Unk3,UNK,Unk,Unk32,Unk Unk32,Forb,0,3,No,not open yet (?),Can probably cut,Just leaves
+7/29/2020,JMD,C06,Control,D5,UnkLeaf2,UNK,Unk,Unk56,Unk Unk56,Forb,0,2,No,Close to opening,Can probably cut,Just leaves
+7/31/2020,JMD,C11,Control,A10,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,0,1,No,too small,,June-Oct
+7/31/2020,JMD,C11,Control,A10,GEVI2,GERANIACEAE,Geranium,viscosissimum,Geranium viscosissimum,Forb,0,1,No,very sad looking,,June-Aug
+7/31/2020,JMD,C11,Control,A10,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,2,No,too small,,May-Sept
+7/31/2020,JMD,C11,Control,A10,POTEN,ROSACEAE,Potentilla,spp.,Potentilla spp.,Forb,0,4,No,too small,,May-June
+7/31/2020,JMD,C11,Control,A5,NA,NA,NA,NA,NA,NA,NA,NA,NA,,,0
+7/31/2020,JMD,C11,Control,B10,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,3,No,too small,,May-Sept
+7/31/2020,JMD,C11,Control,B5,ALLIU,LILIACEAE,Allium,spp.,Allium spp.,Forb,5,1,C11.2,,,May-June
+7/31/2020,JMD,C11,Control,B5,ARUV,ERICACEAE,Arctostaphylos,uva-ursi,Arctostaphylos uva-ursi,Shrub,0,3,No,,,May-June
+7/31/2020,JMD,C11,Control,B5,CAPA10,CAMPANULACEAE,Campanula,parryi,Campanula parryi,Forb,0,1,No,,,June-Aug
+7/31/2020,JMD,C11,Control,B5,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,2,No,,,May-Sept
+7/31/2020,JMD,C11,Control,B5,UnkFuzzy gal,UNK,Unk,Unk45,Unk Unk45,Forb,0,1,No,"From H15. Want to say it's HEPU14, but I;m not seeing any others at this site (supper hairy, has alt leaves)",Looked up photo. Just looks like leaves and there's no notes about finding a flower head. There was only one plant recorded from this site in 2021 so I think we can cut this one,Just leaves
+7/31/2020,JMD,C11,Control,C10,NA,NA,NA,NA,NA,NA,NA,NA,NA,,,0
+7/31/2020,JMD,C11,Control,C5,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,2,No,,,Aug-Oct
+7/31/2020,JMD,C11,Control,C5,ARUV,ERICACEAE,Arctostaphylos,uva-ursi,Arctostaphylos uva-ursi,Shrub,0,2,No,,,May-June
+7/31/2020,JMD,C11,Control,C5,CAPA10,CAMPANULACEAE,Campanula,parryi,Campanula parryi,Forb,0,6,No,,,June-Aug
+7/31/2020,JMD,C11,Control,C5,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,6,No,,,May-Sept
+7/31/2020,JMD,C11,Control,C5,POTEN,ROSACEAE,Potentilla,spp.,Potentilla spp.,Forb,0,18,No,,,May-June
+7/31/2020,JMD,C11,Control,C5,SYMPH,CAPRIFOLIACEAE,Symphoricarpos,spp.,Symphoricarpos spp.,Shrub,0,1,No,,,June-Aug
+7/31/2020,JMD,C11,Control,D10,NA,NA,NA,NA,NA,NA,NA,NA,NA,,,0
+7/31/2020,JMD,C11,Control,D5,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,35,No,,,May-Sept
+7/30/2020,JMD,C21,Control,A10,MARE11,BERBERIDACEAE,Mahonia,repens,Mahonia repens,Shrub,0,1,No,,,April-June
+7/30/2020,JMD,C21,Control,A10,Unk SPAT,UNK,Unk,Unk24,Unk Unk24,Shrub,0,1,No,Spatulated basal rossett,Pre-flowering. Can probably cut,0
+7/30/2020,JMD,C21,Control,A10,UnkLeaf4,UNK,Unk,Unk58,Unk Unk58,Forb,0,5,No,"Large (relatively) leaf, 3 veins. Gloucus",I bet its SEIN2 but probably best to cut. Just leaves,Just leaves
+7/30/2020,JMD,C21,Control,A5,CAPA10,CAMPANULACEAE,Campanula,parryi,Campanula parryi,Forb,0,2,No,1 seed,,June-Aug
+7/30/2020,JMD,C21,Control,A5,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,4,No,~15 seeds,,May-Sept
+7/30/2020,JMD,C21,Control,A5,SALIX,SALICACEAE,Salix,spp.,Salix spp.,shrub,0,6,No,,Identified to SALIX,April-Aug
+7/30/2020,JMD,C21,Control,A5,TAOF,ASTERACEAE,Taraxacum,officinale,Taraxacum officinale,Forb,0,1,No,,,May-June
+7/30/2020,JMD,C21,Control,B10,MARE11,BERBERIDACEAE,Mahonia,repens,Mahonia repens,Shrub,0,1,No,,,April-June
+7/30/2020,JMD,C21,Control,B10,RIBES,GROSSULARIACEAE,Ribes,spp.,Ribes spp.,Shrub,0,3,No,,,April-Aug
+7/30/2020,JMD,C21,Control,B10,ROSA,ROSACEAE,Rosa,acicularis,Rosa acicularis,Shrub,0,2,No,,,June-Aug
+7/30/2020,JMD,C21,Control,B5,NA,NA,NA,NA,NA,NA,NA,NA,NA,,,0
+7/30/2020,JMD,C21,Control,C10,ANTEN,ASTERACEAE,Antennaria,spp.,Antennaria spp.,Forb,0,3,No,,,May-Aug
+7/30/2020,JMD,C21,Control,C10,RIBES,GROSSULARIACEAE,Ribes,spp.,Ribes spp.,Shrub,0,4,No,,,April-Aug
+7/30/2020,JMD,C21,Control,C10,SALIX,SALICACEAE,Salix,spp.,Salix spp.,shrub,0,8,No,"big shrub, hard to tell","Salix scouleriana, most likely, but can leave at SALIX",April-Aug
+7/30/2020,JMD,C21,Control,C5,GALIU,RUBIACEAE,Galium,spp.,Galium spp.,Forb,0,2,No,,,May-Aug
+7/30/2020,JMD,C21,Control,C5,GETR,ROSACEAE,Geum,triflorum,Geum triflorum,Forb,0,5,No,,,May-Aug
+7/30/2020,JMD,C21,Control,C5,RIBES,GROSSULARIACEAE,Ribes,spp.,Ribes spp.,Shrub,0,6,No,,,April-Aug
+7/30/2020,JMD,C21,Control,C5,Unk SPAT,UNK,Unk,Unk24,Unk Unk24,Shrub,0,2,No,Spatulated basal rossett,Pre-flowering. Can probably cut,0
+7/30/2020,JMD,C21,Control,D10,GALIU,RUBIACEAE,Galium,spp.,Galium spp.,Forb,0,1,No,Was GALLIUM. Changed to GALIU,,May-Aug
+7/30/2020,JMD,C21,Control,D10,LUAR3,FABACEAE,Lupinus,argenteus,Lupinus argenteus,Forb,0,14,No,,Probably a lupin. L. argenteus,May-Sept
+7/30/2020,JMD,C21,Control,D10,LUAR3,FABACEAE,Lupinus,argenteus,Lupinus argenteus,Forb,0,2,No,Changed from POTR to POTEN,Changed from POTEN to LUAR3,May-Sept
+7/30/2020,JMD,C21,Control,D10,MARE11,BERBERIDACEAE,Mahonia,repens,Mahonia repens,Shrub,0,4,No,,,April-June
+7/30/2020,JMD,C21,Control,D10,MELA3,BORAGINACEAE,Mertensia,Lanceolata,Mertensia Lanceolata,Forb,0,5,No,,Might be post-seeding. Mertensia lanceolata,May-June
+7/30/2020,JMD,C21,Control,D10,ROSA,ROSACEAE,Rosa,acicularis,Rosa acicularis,Shrub,0,4,No,,,June-Aug
+7/30/2020,JMD,C21,Control,D10,SALIX,SALICACEAE,Salix,spp.,Salix spp.,shrub,0,5,No,,"Salix scouleriana, most likely, but can leave at SALIX",April-Aug
+7/30/2020,JMD,C21,Control,D10,SYAL,CAPRIFOLIACEAE,Symphoricarpos,albus,Symphoricarpos albus,Shrub,0,7,No,,,June-July
+7/30/2020,JMD,C21,Control,D10,TAOF,ASTERACEAE,Taraxacum,officinale,Taraxacum officinale,Forb,0,2,No,,,May-June
+7/30/2020,JMD,C21,Control,D10,UnkLeaf4,UNK,Unk,Unk58,Unk Unk58,Forb,0,2,No,"Large (relatively) leaf, 3 veins. Gloucus",I bet its SEIN2 but probably best to cut. Just leaves,Just leaves
+7/30/2020,JMD,C21,Control,D5,MARE11,BERBERIDACEAE,Mahonia,repens,Mahonia repens,Shrub,0,41,No,,,April-June
+7/30/2020,JMD,C21,Control,D5,RIBES,GROSSULARIACEAE,Ribes,spp.,Ribes spp.,Shrub,0,1,No,branch,,April-Aug
+7/25/2020,JMD,H03,High severity,A10,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,4,No,too small,,Aug-Oct
+7/25/2020,JMD,H03,High severity,A5,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,5,No,super small,,Aug-Oct
+7/25/2020,JMD,H03,High severity,A5,CANU4,ASTERACEAE,Carduus,nutans,Carduus nutans,Forb,0,1,No,Changed from CAUN to CANU4,,June-Oct
+7/25/2020,JMD,H03,High severity,A5,GALIU,RUBIACEAE,Galium,spp.,Galium spp.,Forb,0,2,No,,Changed from Unk bed to GALIU,May-Aug
+7/25/2020,JMD,H03,High severity,A5,UnkPrickle,UNK,Unk,Unk63,Unk Unk63,Forb,0,1,No,munched,Can probably cut,Just leaves
+7/25/2020,JMD,H03,High severity,B10,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,45,5,H03.15,45 F/head 1 head =45,,June-Oct
+7/25/2020,JMD,H03,High severity,B5,CIRSI,ASTERACEAE,Cirsium,spp.,Cirsium spp.,Forb,0,1,No,VERY tiny. Pretty sure its a Cirsium. Changed from CIAR to CIRSI,,June-Sept
+7/25/2020,JMD,H03,High severity,B5,EPILO,ONAGRACEAE,Epilobium,spp.,Epilobium spp.,Forb,1,2,H03.9,might be the same (Unk Bed 1 and Unk Bed),Changed from Unk bed1 to EPILO,June-Aug
+7/25/2020,JMD,H03,High severity,B5,GALIU,RUBIACEAE,Galium,spp.,Galium spp.,Forb,0,3,No,might be the same (Unk Bed 1 and Unk Bed),Changed from Unk bed to GALIU,May-Aug
+7/25/2020,JMD,H03,High severity,C10,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,2,No,not yet blooming,,Aug-Oct
+7/25/2020,JMD,H03,High severity,C10,GALIU,RUBIACEAE,Galium,spp.,Galium spp.,Forb,0,3,No,,Changed from Unk bed to GALIU,May-Aug
+7/25/2020,JMD,H03,High severity,C10,ORPA,ASTERACEAE,Solidago,missourienses,Solidago missourienses,Forb,405,4,H03.3,135 F per head 3 heads --> 405,,July-Oct
+7/25/2020,JMD,H03,High severity,C10,VERBA,SCROPHULARIACEAE,Verbascum,spp.,Verbascum spp.,Forb,0,1,No,,,June-Oct
+7/25/2020,JMD,H03,High severity,C5,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,6,No,not yet blooming,,Aug-Oct
+7/25/2020,JMD,H03,High severity,C5,VERBA,SCROPHULARIACEAE,Verbascum,spp.,Verbascum spp.,Forb,0,1,No,,,June-Oct
+7/25/2020,JMD,H03,High severity,D10,CHAN9,ONAGRACEAE,Chamerion,angustifolium,Chamerion angustifolium,Forb,27,16,H03.22,,,July-Sept
+7/25/2020,JMD,H03,High severity,D5,ARABI2,BRASSICACEAE,Arabis,spp.,Arabis spp.,Forb,0,1,No,not yet blooming. Changed from ARAB to ARABI2,,May-July
+7/25/2020,JMD,H03,High severity,D5,ARFR,ASTERACEAE,Artemisia,absinthium,Artemisia absinthium,Forb,0,17,No,,,July-Oct
+7/25/2020,JMD,H03,High severity,D5,GALIU,RUBIACEAE,Galium,spp.,Galium spp.,Forb,0,1,No,,,May-Aug
+7/25/2020,JMD,H03,High severity,D5,GALIU,RUBIACEAE,Galium,spp.,Galium spp.,Forb,0,9,No,,Changed from Unk bed to GALIU,May-Aug
+7/25/2020,JMD,H03,High severity,D5,ORPA,ASTERACEAE,Solidago,missourienses,Solidago missourienses,Forb,120,6,H03.17,,,July-Oct
+7/25/2020,JMD,H03,High severity,D5,PHACE,HYDROPHYLLACEAE,Phacelia,spp.,Phacelia spp.,Forb,0,2,No,,,May-Aug
+7/19/2020,JMD,H06,High severity,A10,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,0,3,No,"1 head, seeding",,June-Oct
+7/19/2020,JMD,H06,High severity,A10,ALLIU,LILIACEAE,Allium,spp.,Allium spp.,Forb,0,1,No,5 about to bloom,,May-June
+7/19/2020,JMD,H06,High severity,A10,CAPA10,CAMPANULACEAE,Campanula,parryi,Campanula parryi,Forb,1,4,No,,,June-Aug
+7/19/2020,JMD,H06,High severity,A10,ERIOG,POLYGONACEAE,Eriogonum,spp.,Eriogonum spp.,Shrub,75,22,H06.10,"6 umb, ~75 F. Was ERIOG3 changetd to ERIOG for now",,May-June
+7/19/2020,JMD,H06,High severity,A10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,1,11,No,,,July-Oct
+7/19/2020,JMD,H06,High severity,A10,PHACE,HYDROPHYLLACEAE,Phacelia,spp.,Phacelia spp.,Forb,0,4,No,~25 seed heads,,May-Aug
+7/19/2020,JMD,H06,High severity,A10,Unk Aster,ASTERACEAE,Symphotrichum,porteri,Symphotrichum porteri,Forb,0,8,No,,Can probably cut,July-Oct
+7/19/2020,JMD,H06,High severity,A5,ERIOG,POLYGONACEAE,Eriogonum,spp.,Eriogonum spp.,Shrub,0,1,No,"1 umbel, No flowers open yet. Was ERIOG1. Changed to ERIOG for now",,May-June
+7/19/2020,JMD,H06,High severity,A5,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,7,88,No,have a lot already,,July-Oct
+7/19/2020,JMD,H06,High severity,A5,UnkB.Weed,BRASSICACEAE,Lepidium,spp.,Lepidium spp.,Forb,0,95,No,~500 seeds,,May-June
+7/19/2020,JMD,H06,High severity,B10,CAPA10,CAMPANULACEAE,Campanula,parryi,Campanula parryi,Forb,0,2,No,,,June-Aug
+7/19/2020,JMD,H06,High severity,B10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,8,46,H06.4,,,July-Oct
+7/19/2020,JMD,H06,High severity,B10,HIERA,ASTERACEAE,Hieracium,spp.,Hieracium spp.,Forb,0,1,No,,,June-Sept
+7/19/2020,JMD,H06,High severity,B10,PATR7,ASTERACEAE,Packera,tridenticulata,Packera tridenticulata,Forb,0,3,No,,Identified as Packeri tridenticulata,May-July
+7/19/2020,JMD,H06,High severity,B10,PHACE,HYDROPHYLLACEAE,Phacelia,spp.,Phacelia spp.,Forb,0,2,No,3 seed heads,,May-Aug
+7/19/2020,JMD,H06,High severity,B10,POTEN,ROSACEAE,Potentilla,spp.,Potentilla spp.,Forb,0,8,No,,,May-June
+7/19/2020,JMD,H06,High severity,B10,Unk Aster,ASTERACEAE,Symphotrichum,porteri,Symphotrichum porteri,Forb,0,4,No,,Can probably cut,July-Oct
+7/19/2020,JMD,H06,High severity,B10,VERBA,SCROPHULARIACEAE,Verbascum,spp.,Verbascum spp.,Forb,0,1,No,almost NPV now,,June-Oct
+7/19/2020,JMD,H06,High severity,B5,ALLIU,LILIACEAE,Allium,spp.,Allium spp.,Forb,0,1,No,,,May-June
+7/19/2020,JMD,H06,High severity,B5,ERIOG,POLYGONACEAE,Eriogonum,spp.,Eriogonum spp.,Shrub,1,3,H06.3,Was ERIOG1. Changed to ERIOG for now,,May-June
+7/19/2020,JMD,H06,High severity,B5,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,0,7,No,,,July-Oct
+7/19/2020,JMD,H06,High severity,B5,PATR7,ASTERACEAE,Packera,tridenticulata,Packera tridenticulata,Forb,0,2,No,1 seed head,Identified as Packeri tridenticulata,May-July
+7/19/2020,JMD,H06,High severity,B5,POTEN,ROSACEAE,Potentilla,spp.,Potentilla spp.,Forb,0,6,No,,,May-June
+7/19/2020,JMD,H06,High severity,B5,Unk Aster,ASTERACEAE,Symphotrichum,porteri,Symphotrichum porteri,Forb,0,2,No,1 seed head,Can probably cut,July-Oct
+7/19/2020,JMD,H06,High severity,C10,CAPA10,CAMPANULACEAE,Campanula,parryi,Campanula parryi,Forb,2,2,H06.1,"3 heads gone, 3 coming in",,June-Aug
+7/19/2020,JMD,H06,High severity,C10,ERIOG,POLYGONACEAE,Eriogonum,spp.,Eriogonum spp.,Shrub,0,6,No,just basal rosettes. Was ERIOG1. Changed to ERIOG for now,,May-June
+7/19/2020,JMD,H06,High severity,C10,PATR7,ASTERACEAE,Packera,tridenticulata,Packera tridenticulata,Forb,0,1,No,just basal rosette,Identified as Packeri tridenticulata,May-July
+7/19/2020,JMD,H06,High severity,C10,TAOF,ASTERACEAE,Taraxacum,officinale,Taraxacum officinale,Forb,0,1,No,No flower/seeds,,May-June
+7/19/2020,JMD,H06,High severity,C10,Unk Aster,ASTERACEAE,Symphotrichum,porteri,Symphotrichum porteri,Forb,0,6,No,Not yet flowering,Can probably cut,July-Oct
+7/19/2020,JMD,H06,High severity,C10,UnkB.Weed,BRASSICACEAE,Lepidium,spp.,Lepidium spp.,Forb,0,25,No,part flowering,,May-June
+7/19/2020,JMD,H06,High severity,C5,ERIOG,POLYGONACEAE,Eriogonum,spp.,Eriogonum spp.,Shrub,0,17,No,just basal rosettes. Was ERIOG1. Changed to ERIOG for now,,May-June
+7/19/2020,JMD,H06,High severity,C5,PATR7,ASTERACEAE,Packera,tridenticulata,Packera tridenticulata,Forb,8,27,H06.2,collected 4 flower heads,Identified as Packeri tridenticulata,May-July
+7/19/2020,JMD,H06,High severity,C5,PHACE,HYDROPHYLLACEAE,Phacelia,spp.,Phacelia spp.,Forb,0,18,No,~100 seed heads,,May-Aug
+7/19/2020,JMD,H06,High severity,C5,PHLOX,POLEMONIACEAE,Phlox,spp.,Phlox spp.,Forb,0,1,No,,,April-Aug
+7/19/2020,JMD,H06,High severity,C5,Unk Aster2,ASTERACEAE,Packera,tridenticulata,Packera tridenticulata,Forb,0,3,No,,,May-June
+7/19/2020,JMD,H06,High severity,D10,CAPA10,CAMPANULACEAE,Campanula,parryi,Campanula parryi,Forb,0,1,No,missed that one,,June-Aug
+7/19/2020,JMD,H06,High severity,D10,ERIOG,POLYGONACEAE,Eriogonum,spp.,Eriogonum spp.,Shrub,25,2,H06.8,"1 umble, ~ 25  flowers. Was ERIOG1. Changed to ERIOG for now",,May-June
+7/19/2020,JMD,H06,High severity,D10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,2,21,No,Not quite ready to open,,July-Oct
+7/19/2020,JMD,H06,High severity,D10,PHACE,HYDROPHYLLACEAE,Phacelia,spp.,Phacelia spp.,Forb,0,9,No,~15 seed heads,,May-Aug
+7/19/2020,JMD,H06,High severity,D10,POTEN,ROSACEAE,Potentilla,spp.,Potentilla spp.,Forb,0,3,No,,,May-June
+7/19/2020,JMD,H06,High severity,D10,Unk Aster,ASTERACEAE,Symphotrichum,porteri,Symphotrichum porteri,Forb,0,2,No,,Can probably cut,July-Oct
+7/19/2020,JMD,H06,High severity,D5,CAPA10,CAMPANULACEAE,Campanula,parryi,Campanula parryi,Forb,1,2,H06.7,pretty sure there are no anthers,,June-Aug
+7/19/2020,JMD,H06,High severity,D5,ERIOG,POLYGONACEAE,Eriogonum,spp.,Eriogonum spp.,Shrub,100,4,H06.5,"2 heads ~ flowers, Note: each ""bloom"" is a unible conaining ~ 50 flowers. Was ERIOG1. Changed to ERIOG for now",,May-June
+7/19/2020,JMD,H06,High severity,D5,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,12,39,H06.6,,,July-Oct
+7/19/2020,JMD,H06,High severity,D5,PATR7,ASTERACEAE,Packera,tridenticulata,Packera tridenticulata,Forb,0,6,No,,Identified as Packeri tridenticulata,May-July
+7/19/2020,JMD,H06,High severity,D5,PHACE,HYDROPHYLLACEAE,Phacelia,spp.,Phacelia spp.,Forb,0,1,No,~5 seeds,,May-Aug
+7/19/2020,JMD,H06,High severity,D5,Unk Aster,ASTERACEAE,Symphotrichum,porteri,Symphotrichum porteri,Forb,0,2,No,,Can probably cut,July-Oct
+7/29/2020,JMD,H09,High severity,A10,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,0,2,No,,,June-Oct
+7/29/2020,JMD,H09,High severity,A10,AMTO3,ASTERACEAE,Ambrosia,tomentosa,Ambrosia tomentosa,Forb,0,1,No,,Identified as Ambrosia tomentosa,June-Sept
+7/29/2020,JMD,H09,High severity,A10,ARFR,ASTERACEAE,Artemisia,absinthium,Artemisia absinthium,Forb,0,3,No,,,July-Oct
+7/29/2020,JMD,H09,High severity,A10,ASTRA,FABACEAE,Astragalus,spp.,Astragalus spp.,Shrub,0,25,No,1 shrub,,April-Aug
+7/29/2020,JMD,H09,High severity,A10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,13,44,No,Have a LOT of samples now,,July-Oct
+7/29/2020,JMD,H09,High severity,A10,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,1,No,,,May-Sept
+7/29/2020,JMD,H09,High severity,A10,Unk BR,UNK,Unk,Unk10,Unk Unk10,Forb,0,1,No,,"Just leaves, can cut",Just leaves
+7/29/2020,JMD,H09,High severity,A10,UnkGoldenrod,ASTERACEAE,Solidago,missourienses,Solidago missourienses,Forb,85,2,H09.22,2 heads,Can probably cut,July-Oct
+7/29/2020,JMD,H09,High severity,A10,UnkWeed1,ASTERACEAE,Symphotrichum,porteri,Symphotrichum porteri,Forb,0,16,No,,Can probably cut,July-Oct
+7/29/2020,JMD,H09,High severity,A5,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,0,1,No,,,June-Oct
+7/29/2020,JMD,H09,High severity,A5,AMTO3,ASTERACEAE,Ambrosia,tomentosa,Ambrosia tomentosa,Forb,500,4,H09.20,4 heads,Identified as Ambrosia tomentosa,June-Sept
+7/29/2020,JMD,H09,High severity,A5,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,44,No,,,Aug-Oct
+7/29/2020,JMD,H09,High severity,A5,ARFR,ASTERACEAE,Artemisia,absinthium,Artemisia absinthium,Forb,0,1,No,,,July-Oct
+7/29/2020,JMD,H09,High severity,A5,EPILO,ONAGRACEAE,Epilobium,spp.,Epilobium spp.,Forb,0,5,No,,,June-Aug
+7/29/2020,JMD,H09,High severity,A5,GEVI2,GERANIACEAE,Geranium,viscosissimum,Geranium viscosissimum,Forb,0,5,No,Seeding,,June-Aug
+7/29/2020,JMD,H09,High severity,A5,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,1,8,H09.19,,,July-Oct
+7/29/2020,JMD,H09,High severity,A5,UnkWeed1,ASTERACEAE,Symphotrichum,porteri,Symphotrichum porteri,Forb,4,16,H09.18,,Can probably cut,July-Oct
+7/29/2020,JMD,H09,High severity,B10,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,0,4,No,"2-too small, 2-past flowering",,June-Oct
+7/29/2020,JMD,H09,High severity,B10,AMTO3,ASTERACEAE,Ambrosia,tomentosa,Ambrosia tomentosa,Forb,500,6,H09.7,6 heads,Identified as Ambrosia tomentosa,June-Sept
+7/29/2020,JMD,H09,High severity,B10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,5,61,H09.8,,,July-Oct
+7/29/2020,JMD,H09,High severity,B10,LUPIN,FABACEAE,Lupinus,spp.,Lupinus spp.,Forb,3,18,H09.9,Most are seeding,,April-Sept
+7/29/2020,JMD,H09,High severity,B10,SEIN2,ASTERACEAE,Senecio,integerrimus,Senecio integerrimus,Forb,0,1,No,Past flowering,identified as Senecio integerrimus,May-June
+7/29/2020,JMD,H09,High severity,B10,UnkWeed1,ASTERACEAE,Symphotrichum,porteri,Symphotrichum porteri,Forb,0,2,No,Not quite flowering,Can probably cut,July-Oct
+7/29/2020,JMD,H09,High severity,B5,AMTO3,ASTERACEAE,Ambrosia,tomentosa,Ambrosia tomentosa,Forb,250,3,H09.4,2 heads,Identified as Ambrosia tomentosa,June-Sept
+7/29/2020,JMD,H09,High severity,B5,ARABI2,BRASSICACEAE,Arabis,spp.,Arabis spp.,Forb,0,1,No,Change from ARABI to ARABI2,,May-July
+7/29/2020,JMD,H09,High severity,B5,EPILO,ONAGRACEAE,Epilobium,spp.,Epilobium spp.,Forb,3,58,H09.6,SUPER tiny,,June-Aug
+7/29/2020,JMD,H09,High severity,B5,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,9,73,H09.5,,,July-Oct
+7/29/2020,JMD,H09,High severity,B5,LUPIN,FABACEAE,Lupinus,spp.,Lupinus spp.,Forb,0,2,No,"Was LUCA, changed to LUPIN",,April-Sept
+7/29/2020,JMD,H09,High severity,C10,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,0,1,No,too small,,June-Oct
+7/29/2020,JMD,H09,High severity,C10,AMTO3,ASTERACEAE,Ambrosia,tomentosa,Ambrosia tomentosa,Forb,0,1,No,too small,Identified as Ambrosia tomentosa,June-Sept
+7/29/2020,JMD,H09,High severity,C10,ARFR,ASTERACEAE,Artemisia,absinthium,Artemisia absinthium,Forb,0,2,No,too young,,July-Oct
+7/29/2020,JMD,H09,High severity,C10,CEFE,RHAMNACEAE,Ceanothus,fendleri,Ceanothus fendleri,Shrub,0,9,No,"past, 9(1 shrub)",,May-June
+7/29/2020,JMD,H09,High severity,C10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,5,82,H09.3,,,July-Oct
+7/29/2020,JMD,H09,High severity,C10,SEIN2,ASTERACEAE,Senecio,integerrimus,Senecio integerrimus,Forb,0,1,No,too small,identified as Senecio integerrimus,May-June
+7/29/2020,JMD,H09,High severity,C10,UnkWeed1,ASTERACEAE,Symphotrichum,porteri,Symphotrichum porteri,Forb,0,4,No,too small,Can probably cut,July-Oct
+7/29/2020,JMD,H09,High severity,C5,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,0,7,No,too young,,June-Oct
+7/29/2020,JMD,H09,High severity,C5,ARFR,ASTERACEAE,Artemisia,absinthium,Artemisia absinthium,Forb,0,2,No,too young,,July-Oct
+7/29/2020,JMD,H09,High severity,C5,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,0,2,No,Not quite there yet,,July-Oct
+7/29/2020,JMD,H09,High severity,C5,LUPIN,FABACEAE,Lupinus,spp.,Lupinus spp.,Forb,30,3,H09.1,"Was LUCA, changed to LUPIN",,April-Sept
+7/29/2020,JMD,H09,High severity,C5,SEIN2,ASTERACEAE,Senecio,integerrimus,Senecio integerrimus,Forb,0,3,No,Past flowering (?),identified as Senecio integerrimus,May-June
+7/29/2020,JMD,H09,High severity,D10,CEFE,RHAMNACEAE,Ceanothus,fendleri,Ceanothus fendleri,Shrub,0,9,No,,,May-June
+7/29/2020,JMD,H09,High severity,D10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,23,53,H09.16,,,July-Oct
+7/29/2020,JMD,H09,High severity,D10,LUPIN,FABACEAE,Lupinus,spp.,Lupinus spp.,Forb,0,1,No,"Was LUCA, changed to LUPIN",,April-Sept
+7/29/2020,JMD,H09,High severity,D10,SEIN2,ASTERACEAE,Senecio,integerrimus,Senecio integerrimus,Forb,0,1,,"something got cut off on Xerox, can't see it",identified as Senecio integerrimus,May-June
+7/29/2020,JMD,H09,High severity,D10,UnkGoldenrod,ASTERACEAE,Solidago,missourienses,Solidago missourienses,Forb,0,1,No,,Can probably cut,July-Oct
+7/29/2020,JMD,H09,High severity,D5,CEFE,RHAMNACEAE,Ceanothus,fendleri,Ceanothus fendleri,Shrub,0,39,H09.12,"Seeding, hard to tell. 1 shrub",,May-June
+7/29/2020,JMD,H09,High severity,D5,LUPIN,FABACEAE,Lupinus,spp.,Lupinus spp.,Forb,0,5,No,Crispy. Was LUCA changed to LUPIN,,April-Sept
+7/31/2020,JMD,H15,High severity,A10,JAAM,HYDRANGEACEAE,Jamesia,americana,Jamesia americana,Shrub,70,10,H15.1,seeding (~900 old flowers),,May-July
+7/31/2020,JMD,H15,High severity,A10,LASE,ASTERACEAE,Lactuca,serriola,Lactuca serriola,Forb,1,1,H15.2,,Identified as Lactuca serriola,June-Oct
+7/31/2020,JMD,H15,High severity,A10,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,3,No,seeding ~30,,May-Sept
+7/31/2020,JMD,H15,High severity,A10,POTEN,ROSACEAE,Potentilla,spp.,Potentilla spp.,Forb,0,4,No,,,May-June
+7/31/2020,JMD,H15,High severity,A5,COPA3,SCROPHULARIACEAE,Collinsia,parviflora,Collinsia parviflora,Forb,2,5,H15.3,,,May-June
+7/31/2020,JMD,H15,High severity,A5,GALIU,RUBIACEAE,Galium,spp.,Galium spp.,Forb,0,3,No,,,May-Aug
+7/31/2020,JMD,H15,High severity,A5,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,44,No,~400 seeds,,May-Sept
+7/31/2020,JMD,H15,High severity,A5,POTEN,ROSACEAE,Potentilla,spp.,Potentilla spp.,Forb,0,56,No,~7 seed heads,,May-June
+7/31/2020,JMD,H15,High severity,B10,AMTO3,ASTERACEAE,Ambrosia,tomentosa,Ambrosia tomentosa,Forb,0,4,No,too small,Calling AMTO3,June-Sept
+7/31/2020,JMD,H15,High severity,B10,GALIU,RUBIACEAE,Galium,spp.,Galium spp.,Forb,0,1,No,"Was GALLI, changed to GALIU",,May-Aug
+7/31/2020,JMD,H15,High severity,B10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,3,22,No,have SO many vials already,,July-Oct
+7/31/2020,JMD,H15,High severity,B10,LASE,ASTERACEAE,Lactuca,serriola,Lactuca serriola,Forb,1,1,H15.10,,Identified as Lactuca serriola,June-Oct
+7/31/2020,JMD,H15,High severity,B10,UnkTiny B,BRASSICACEAE,Lepidium,spp.,Lepidium spp.,Forb,0,3,No,seeding,,May-June
+7/31/2020,JMD,H15,High severity,B5,AMTO3,ASTERACEAE,Ambrosia,tomentosa,Ambrosia tomentosa,Forb,0,1,No,too small,Calling AMTO3,June-Sept
+7/31/2020,JMD,H15,High severity,B5,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,14,No,,,Aug-Oct
+7/31/2020,JMD,H15,High severity,B5,CEFE,RHAMNACEAE,Ceanothus,fendleri,Ceanothus fendleri,Shrub,0,18,No,seeding,,May-June
+7/31/2020,JMD,H15,High severity,B5,UnkFuzzy gal,UNK,Unk,Unk45,Unk Unk45,Forb,0,3,No,Opp. Whorled leaves that are fuzzy. Collected from plot,Could not find collection. No flowers or evidence of flowers in photos. Looks pretty small. Can probably cut,Just leaves
+7/31/2020,JMD,H15,High severity,B5,UnkTiny B,BRASSICACEAE,Lepidium,spp.,Lepidium spp.,Forb,0,114,No,seeding,,May-June
+7/31/2020,JMD,H15,High severity,C10,AMTO3,ASTERACEAE,Ambrosia,tomentosa,Ambrosia tomentosa,Forb,0,4,No,not yet,Calling AMTO3,June-Sept
+7/31/2020,JMD,H15,High severity,C10,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,4,No,,,Aug-Oct
+7/31/2020,JMD,H15,High severity,C10,SYMPH,CAPRIFOLIACEAE,Symphoricarpos,spp.,Symphoricarpos spp.,Shrub,0,3,No,looking crispy,,June-Aug
+7/31/2020,JMD,H15,High severity,C10,UnkFuzzy gal,UNK,Unk,Unk45,Unk Unk45,Forb,0,16,No,Opp. Whorled leaves that are fuzzy. Collected from plot,Could not find collection. No flowers or evidence of flowers in photos. Looks pretty small. Can probably cut,Just leaves
+7/31/2020,JMD,H15,High severity,C10,UnkGoldenrod,ASTERACEAE,Solidago,missourienses,Solidago missourienses,Forb,100,4,H15.14,2 panicled,Can probably cut,July-Oct
+7/31/2020,JMD,H15,High severity,C5,CEFE,RHAMNACEAE,Ceanothus,fendleri,Ceanothus fendleri,Shrub,0,32,No,"Was CEFR, changed to CEFE (Ceanothus fendleri)",,May-June
+7/31/2020,JMD,H15,High severity,C5,COPA3,SCROPHULARIACEAE,Collinsia,parviflora,Collinsia parviflora,Forb,3,2,H15.12,,,May-June
+7/31/2020,JMD,H15,High severity,C5,UnkGoldenrod,ASTERACEAE,Solidago,missourienses,Solidago missourienses,Forb,0,12,No,just basal rosetts,Can probably cut,July-Oct
+7/31/2020,JMD,H15,High severity,C5,UnkShrubby Bed,UNK,Unk,Unk69,Unk Unk69,Forb,0,1,No,,"Can probably cut - not flowering, just leaves",Just leaves
+7/31/2020,JMD,H15,High severity,D10,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,13,No,,,Aug-Oct
+7/31/2020,JMD,H15,High severity,D10,CEFE,RHAMNACEAE,Ceanothus,fendleri,Ceanothus fendleri,Shrub,0,35,No,SUPER hard to count (prickly),,May-June
+7/31/2020,JMD,H15,High severity,D10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,23,19,H15.8,,,July-Oct
+7/31/2020,JMD,H15,High severity,D10,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,7,No,~70 seed heads,,May-Sept
+7/31/2020,JMD,H15,High severity,D10,VERBA,SCROPHULARIACEAE,Verbascum,spp.,Verbascum spp.,Forb,0,5,No,Was VETH? Changed to VERBA,,June-Oct
+7/31/2020,JMD,H15,High severity,D5,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,2,No,,,Aug-Oct
+7/31/2020,JMD,H15,High severity,D5,CEFE,RHAMNACEAE,Ceanothus,fendleri,Ceanothus fendleri,Shrub,0,58,No,seeding,,May-June
+7/31/2020,JMD,H15,High severity,D5,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,11,11,H15.4,,,July-Oct
+7/31/2020,JMD,H15,High severity,D5,UnkShrubby Bed,UNK,Unk,Unk69,Unk Unk69,Forb,0,11,No,,"Can probably cut - not flowering, just leaves",Just leaves
+7/30/2020,JMD,H18,High severity,A10,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,0,11,No,,,June-Oct
+7/30/2020,JMD,H18,High severity,A10,CAPA10,CAMPANULACEAE,Campanula,parryi,Campanula parryi,Forb,2,5,H18.9,"~45 past, 1 about to bloom",,June-Aug
+7/30/2020,JMD,H18,High severity,A10,CHAN9,ONAGRACEAE,Chamerion,angustifolium,Chamerion angustifolium,Forb,0,3,No,,,July-Sept
+7/30/2020,JMD,H18,High severity,A10,CIRSI,ASTERACEAE,Cirsium,spp.,Cirsium spp.,Forb,0,3,No,Changed from CIAR to CIRSI,,June-Sept
+7/30/2020,JMD,H18,High severity,A10,ERIGE2,ASTERACEAE,Erigeron,spp.,Erigeron spp.,Forb,0,2,No,~25 about to bloom,Pretty sure this is an ERIGE2,May-June
+7/30/2020,JMD,H18,High severity,A10,GEVI2,GERANIACEAE,Geranium,viscosissimum,Geranium viscosissimum,Forb,0,11,No,,,June-Aug
+7/30/2020,JMD,H18,High severity,A10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,1,22,H18.10,,,July-Oct
+7/30/2020,JMD,H18,High severity,A10,Unk GALIU,RUBIACEAE,Galium,spp.,Galium spp.,Forb,0,5,No,"Was GALLI (?), changed to Unk GALIU for now ",Can probably cut,May-Aug
+7/30/2020,JMD,H18,High severity,A5,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,0,42,No,,,June-Oct
+7/30/2020,JMD,H18,High severity,A5,CAPA10,CAMPANULACEAE,Campanula,parryi,Campanula parryi,Forb,1,21,H18.5,,,June-Aug
+7/30/2020,JMD,H18,High severity,A5,CEFE,RHAMNACEAE,Ceanothus,fendleri,Ceanothus fendleri,Shrub,0,4,No,,,May-June
+7/30/2020,JMD,H18,High severity,A5,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,0,17,No,,,July-Oct
+7/30/2020,JMD,H18,High severity,A5,TAOF,ASTERACEAE,Taraxacum,officinale,Taraxacum officinale,Forb,0,3,No,,,May-June
+7/30/2020,JMD,H18,High severity,A5,UnkLeaf3,UNK,Unk,Unk57,Unk Unk57,Forb,0,29,No,,Can probably cut,Just leaves
+7/30/2020,JMD,H18,High severity,B10,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,50,6,H18.19,"1 head, seeding",,June-Oct
+7/30/2020,JMD,H18,High severity,B10,ALLIU,LILIACEAE,Allium,spp.,Allium spp.,Forb,3,1,H18.20,,,May-June
+7/30/2020,JMD,H18,High severity,B10,CAPA10,CAMPANULACEAE,Campanula,parryi,Campanula parryi,Forb,0,2,No,~3 seed heads,,June-Aug
+7/30/2020,JMD,H18,High severity,B10,CEFE,RHAMNACEAE,Ceanothus,fendleri,Ceanothus fendleri,Shrub,0,25,No,got cut off - can't read it (updated 4/7/2022),,May-June
+7/30/2020,JMD,H18,High severity,B10,GEVI2,GERANIACEAE,Geranium,viscosissimum,Geranium viscosissimum,Forb,2,21,H18.17,,,June-Aug
+7/30/2020,JMD,H18,High severity,B10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,8,27,H18.18,,,July-Oct
+7/30/2020,JMD,H18,High severity,B10,LUAR3,FABACEAE,Lupinus,argenteus,Lupinus argenteus,Forb,0,13,No,Changed from POTR to POTEN,Changed from POTEN to LUAR3,May-Sept
+7/30/2020,JMD,H18,High severity,B10,MOFI,LAMIACEAE,Monarda,fistulosa,Monarda fistulosa,Forb,0,11,No,,,June-Sept
+7/30/2020,JMD,H18,High severity,B10,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,7,No,~45 seeds,,May-Sept
+7/30/2020,JMD,H18,High severity,B10,SYMPH4,ASTERACEAE,Symphyotrichum,spp.,Symphyotrichum spp.,Forb,0,1,No,Was GALLIU(?) changed to Unk GALI?,Identified to Symphyotrichum spp,July-Oct
+7/30/2020,JMD,H18,High severity,B10,Unk5,POLEMONIACEAE,Phlox,multiflora,Phlox multiflora,Forb,0,8,No,,Identified to Galium spp,April-July
+7/30/2020,JMD,H18,High severity,B5,ERIOG,POLYGONACEAE,Eriogonum,spp.,Eriogonum spp.,Shrub,0,2,No,"Was ERCO, change to ERIOG",,May-June
+7/30/2020,JMD,H18,High severity,B5,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,3,8,No,,,July-Oct
+7/30/2020,JMD,H18,High severity,B5,MOFI,LAMIACEAE,Monarda,fistulosa,Monarda fistulosa,Forb,0,4,No,,,June-Sept
+7/30/2020,JMD,H18,High severity,B5,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,1,No,seeds,,May-Sept
+7/30/2020,JMD,H18,High severity,B5,TRAGO,ASTERACEAE,Tragopogon,spp.,Tragopogon spp.,Forb,0,2,No,"1 about to open, 2 gone. Was TOPR (Tragopogon pratensis.) Changed to TRAGO for now",,May-Sept
+7/30/2020,JMD,H18,High severity,B5,Unk5,POLEMONIACEAE,Phlox,multiflora,Phlox multiflora,Forb,0,6,No,~25 old seeds,Pretty sure this is a Galium,April-July
+7/30/2020,JMD,H18,High severity,C10,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,0,2,No,,,June-Oct
+7/30/2020,JMD,H18,High severity,C10,CAPA10,CAMPANULACEAE,Campanula,parryi,Campanula parryi,Forb,1,27,No,Already have 5,,June-Aug
+7/30/2020,JMD,H18,High severity,C10,CEFE,RHAMNACEAE,Ceanothus,fendleri,Ceanothus fendleri,Shrub,0,4,No, (1 shrub not in plot only bravelus),,May-June
+7/30/2020,JMD,H18,High severity,C10,CHAN9,ONAGRACEAE,Chamerion,angustifolium,Chamerion angustifolium,Forb,0,3,No,,,July-Sept
+7/30/2020,JMD,H18,High severity,C10,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,5,No,~15 seeds,,May-Sept
+7/30/2020,JMD,H18,High severity,C10,RUIDS2,ROSACEAE,Rubus,idaeus,Rubus idaeus,Shrub,0,5,No,Fruiting,,June-Aug
+7/30/2020,JMD,H18,High severity,C10,TAOF,ASTERACEAE,Taraxacum,officinale,Taraxacum officinale,Forb,0,4,No,,,May-June
+7/30/2020,JMD,H18,High severity,C10,Unk GALIU,RUBIACEAE,Galium,spp.,Galium spp.,Forb,0,55,No,"Not yet flowered? Was GALLI (?), changed to Unk GALIU for now ",Can probably cut,May-Aug
+7/30/2020,JMD,H18,High severity,C5,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,0,9,No,,,June-Oct
+7/30/2020,JMD,H18,High severity,C5,CAPA10,CAMPANULACEAE,Campanula,parryi,Campanula parryi,Forb,3,41,H18.12,,,June-Aug
+7/30/2020,JMD,H18,High severity,C5,CEFE,RHAMNACEAE,Ceanothus,fendleri,Ceanothus fendleri,Shrub,0,16,No,,,May-June
+7/30/2020,JMD,H18,High severity,C5,CHAN9,ONAGRACEAE,Chamerion,angustifolium,Chamerion angustifolium,Forb,0,1,No,,,July-Sept
+7/30/2020,JMD,H18,High severity,C5,CIRSI,ASTERACEAE,Cirsium,spp.,Cirsium spp.,Forb,0,4,No,"Was CIAR, Changed to CIRSI",,June-Sept
+7/30/2020,JMD,H18,High severity,C5,LUAR3,FABACEAE,Lupinus,argenteus,Lupinus argenteus,Forb,0,6,No,,Changed from POTEN to LUAR3,May-Sept
+7/30/2020,JMD,H18,High severity,C5,PAFE4,ASTERACEAE,Packera,fendleri,Packera fendleri,Forb,0,8,No,6 seed heads,Identified as Packera fendleri,May-Sept
+7/30/2020,JMD,H18,High severity,C5,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,6,No,~20 seeds,,May-Sept
+7/30/2020,JMD,H18,High severity,C5,RUIDS2,ROSACEAE,Rubus,idaeus,Rubus idaeus,Shrub,0,1,No,,,June-Aug
+7/30/2020,JMD,H18,High severity,C5,TAOF,ASTERACEAE,Taraxacum,officinale,Taraxacum officinale,Forb,0,3,No,,,May-June
+7/30/2020,JMD,H18,High severity,C5,Unk GALIU,RUBIACEAE,Galium,spp.,Galium spp.,Forb,0,17,No,"nothing blooming yet. Was GALLI (?), changed to Unk GALIU for now ",Can probably cut,May-Aug
+7/30/2020,JMD,H18,High severity,C5,Unk5,POLEMONIACEAE,Phlox,multiflora,Phlox multiflora,Forb,0,113,No,~75 seed heads,Identified to Galium spp,April-July
+7/30/2020,JMD,H18,High severity,D10,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,0,2,No,too small,,June-Oct
+7/30/2020,JMD,H18,High severity,D10,ANTEN,ASTERACEAE,Antennaria,spp.,Antennaria spp.,Forb,0,3,No,"part flowering, (Basal rosettes)",,May-Aug
+7/30/2020,JMD,H18,High severity,D10,CAPA10,CAMPANULACEAE,Campanula,parryi,Campanula parryi,Forb,0,2,No,2 past flowering,,June-Aug
+7/30/2020,JMD,H18,High severity,D10,GALIU,RUBIACEAE,Galium,spp.,Galium spp.,Forb,0,5,No,part flowering?,Indentified as Galium,May-Aug
+7/30/2020,JMD,H18,High severity,D10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,0,12,No,not yet opened,,July-Oct
+7/30/2020,JMD,H18,High severity,D10,LUAR3,FABACEAE,Lupinus,argenteus,Lupinus argenteus,Forb,0,3,No,too small,Changed from POTEN to LUAR3,May-Sept
+7/30/2020,JMD,H18,High severity,D10,LUAR3,FABACEAE,Lupinus,argenteus,Lupinus argenteus,Forb,0,13,No,too small,Changed from POTEN to LUAR3,May-Sept
+7/30/2020,JMD,H18,High severity,D10,Unk3,UNK,Unk,Unk32,Unk Unk32,Forb,0,1,No,not yet opened,Can probably cut,Just leaves
+7/30/2020,JMD,H18,High severity,D10,UnkShrubby Bed,UNK,Unk,Unk69,Unk Unk69,Forb,0,134,No,?,"Was entered as UnkShrubby aster, but is Shrubby Bed in datasheets. Just leaves. Can probably cut",Just leaves
+7/30/2020,JMD,H18,High severity,D5,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,0,1,No,past flowering,,June-Oct
+7/30/2020,JMD,H18,High severity,D5,LUAR3,FABACEAE,Lupinus,argenteus,Lupinus argenteus,Forb,0,8,No,past flowering,Changed from POTEN to LUAR3,May-Sept
+7/30/2020,JMD,H18,High severity,D5,MOFI,LAMIACEAE,Monarda,fistulosa,Monarda fistulosa,Forb,0,39,No,past flowering,,June-Sept
+7/30/2020,JMD,H18,High severity,D5,ROAC,ROSACEAE,Rosa,acicularis,Rosa acicularis,Shrub,0,6,No,past flowering,,June-Aug
+7/30/2020,JMD,H18,High severity,D5,TRAGO,ASTERACEAE,Tragopogon,spp.,Tragopogon spp.,Forb,0,1,No,past flowering. Was TOPR (Tragopogon pratensis.) Changed to TRAGO for now,,May-Sept
+7/30/2020,JMD,H18,High severity,D5,UnkShrubby Bed,UNK,Unk,Unk69,Unk Unk69,Forb,0,28,No,past flowering,"Was entered as UnkShrubby aster, but is Shrubby Bed in datasheets. Just leaves. Can probably cut",Just leaves
+7/16/2020,JMD,T02,Treated,A10,CAPA10,CAMPANULACEAE,Campanula,parryi,Campanula parryi,Forb,3,1,No,,,June-Aug
+7/16/2020,JMD,T02,Treated,A10,GALIU,RUBIACEAE,Galium,spp.,Galium spp.,Forb,0,20,No,,Indentified as GALIU,May-Aug
+7/16/2020,JMD,T02,Treated,A10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,0,3,No,"3 seed heads, 2 unopened",,July-Oct
+7/16/2020,JMD,T02,Treated,A10,OPUNT,CACTACEAE,Opuntia,spp.,Opuntia spp.,Shrub,0,1,No,~90 seed heads. I wonder if this is supposed to be for Unk Forb (OPUNT was not flowering),,May-Aug
+7/16/2020,JMD,T02,Treated,A10,Unk Art,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,15,No,,Same as UnkArt from C03,Aug-Oct
+7/16/2020,JMD,T02,Treated,A5,LOMAT,APIACEAE,Lomatium,spp.,Lomatium spp.,Forb,0,2,T02.1,~80 seed heads,,May-June
+7/16/2020,JMD,T02,Treated,B10,NA,NA,NA,NA,NA,NA,NA,NA,NA,-,,0
+7/16/2020,JMD,T02,Treated,B5,ALLIU,LILIACEAE,Allium,spp.,Allium spp.,Forb,11,1,No,seed,,May-June
+7/16/2020,JMD,T02,Treated,C10,NA,NA,NA,NA,NA,NA,NA,NA,NA,-,,0
+7/16/2020,JMD,T02,Treated,C5,NA,NA,NA,NA,NA,NA,NA,NA,NA,-,,0
+7/16/2020,JMD,T02,Treated,D10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,1,4,No,already have a bunch from Heil Suites,,July-Oct
+7/16/2020,JMD,T02,Treated,D5,LOMAT,APIACEAE,Lomatium,spp.,Lomatium spp.,Forb,0,2,No,no flower heads,,May-June
+7/14/2020,JMD,T05,Treated,A10,ARBI2,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,1,No,,Changed from UnkArt to ARBI2,Aug-Oct
+7/14/2020,JMD,T05,Treated,A10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,1,6,A10.2,,,July-Oct
+7/14/2020,JMD,T05,Treated,A10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,24,102,A10.1,,,July-Oct
+7/14/2020,JMD,T05,Treated,A10,LILY,LILIACEAE,Unk,Unk,Unk Unk,Forb,0,1,No,,,0
+7/14/2020,JMD,T05,Treated,A5,Unk TriForb,UNK,Unk,Unk89,Unk Unk89,Forb,0,1,No,not yet ready to flower,Can probably cut,Just leaves
+7/14/2020,JMD,T05,Treated,B10,ARBI2,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,16,No,,Changed from UnkArt to ARBI2,Aug-Oct
+7/14/2020,JMD,T05,Treated,B10,GALIU,RUBIACEAE,Galium,spp.,Galium spp.,Forb,0,2,No,"Was GALLIUM, changed to GALIU",,May-Aug
+7/14/2020,JMD,T05,Treated,B10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,3,12,B10.1,,,July-Oct
+7/14/2020,JMD,T05,Treated,B10,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,1,No,Changed from PENST? To PENST,,May-Sept
+7/14/2020,JMD,T05,Treated,B10,UnkFuzz,UNK,Unk,Unk43,Unk Unk43,Forb,0,5,No,,Can probably cut,Just leaves
+7/14/2020,JMD,T05,Treated,B5,GEVI2,GERANIACEAE,Geranium,viscosissimum,Geranium viscosissimum,Forb,0,4,No,,,June-Aug
+7/14/2020,JMD,T05,Treated,C10,ALLIU,LILIACEAE,Allium,spp.,Allium spp.,Forb,0,2,No,~20 seed heads,,May-June
+7/14/2020,JMD,T05,Treated,C10,ARBI2,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,7,No,,Changed from UnkArt to ARBI2,Aug-Oct
+7/14/2020,JMD,T05,Treated,C5,LILY,LILIACEAE,Unk,Unk,Unk Unk,Forb,0,1,No,past prime,,0
+7/14/2020,JMD,T05,Treated,D10,GEVI2,GERANIACEAE,Geranium,viscosissimum,Geranium viscosissimum,Forb,0,5,No,,,June-Aug
+7/14/2020,JMD,T05,Treated,D10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,9,74,No,already have 4,,July-Oct
+7/14/2020,JMD,T05,Treated,D10,Unk Rae,Commelinaceae,Tradescantia,occidentalis,Tradescantia occidentalis,Forb,0,1,No ,not yet ready to flower,Can probably cut,May-Aug
+7/14/2020,JMD,T05,Treated,D5,GEVI2,GERANIACEAE,Geranium,viscosissimum,Geranium viscosissimum,Forb,0,9,No,,,June-Aug
+7/14/2020,JMD,T05,Treated,D5,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,6,42,D5.1,,,July-Oct
+7/25/2020,JMD,T08,Treated,A10,GETR,ROSACEAE,Geum,triflorum,Geum triflorum,Forb,0,3,No,past seeding,,May-Aug
+7/25/2020,JMD,T08,Treated,A10,LOMAT,APIACEAE,Lomatium,spp.,Lomatium spp.,Forb,0,1,No,past seeding,,May-June
+7/25/2020,JMD,T08,Treated,A10,LUPIN,FABACEAE,Lupinus,spp.,Lupinus spp.,Forb,0,1,No,past seeding,,April-Sept
+7/25/2020,JMD,T08,Treated,A10,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,3,No,seeding,,May-Sept
+7/25/2020,JMD,T08,Treated,A10,STLA,CRASSULACEAE,Sedum,lanceolatum,Sedum lanceolatum,Forb,15,59,No,past prime,,May-Sept
+7/25/2020,JMD,T08,Treated,A5,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,0,6,No,,,June-Oct
+7/25/2020,JMD,T08,Treated,A5,ARFR,ASTERACEAE,Artemisia,absinthium,Artemisia absinthium,Forb,0,1,No,,,July-Oct
+7/25/2020,JMD,T08,Treated,A5,ASTRA,FABACEAE,Astragalus,spp.,Astragalus spp.,Shrub,0,10,No,,,April-Aug
+7/25/2020,JMD,T08,Treated,A5,EPILO,ONAGRACEAE,Epilobium,spp.,Epilobium spp.,Forb,0,2,No,almost flowering,Changed from UnkBed1 to EPILO,June-Aug
+7/25/2020,JMD,T08,Treated,A5,GAAR,ASTERACEAE,Gaillardia,aristata,Gaillardia aristata,Forb,0,3,No,,,May-Sept
+7/25/2020,JMD,T08,Treated,A5,GEVI2,GERANIACEAE,Geranium,viscosissimum,Geranium viscosissimum,Forb,0,1,No,,,June-Aug
+7/25/2020,JMD,T08,Treated,A5,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,7,42,T08.1,,,July-Oct
+7/25/2020,JMD,T08,Treated,A5,LILY,LILIACEAE,Unk,Unk,Unk Unk,Forb,0,1,No,Was LILY? Changed to LILY,,0
+7/25/2020,JMD,T08,Treated,A5,LOMAT,APIACEAE,Lomatium,spp.,Lomatium spp.,Forb,0,7,No,,,May-June
+7/25/2020,JMD,T08,Treated,A5,LUPIN,FABACEAE,Lupinus,spp.,Lupinus spp.,Forb,0,1,No,too small,,April-Sept
+7/25/2020,JMD,T08,Treated,A5,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,7,No,seeding,,May-Sept
+7/25/2020,JMD,T08,Treated,A5,STLA,CRASSULACEAE,Sedum,lanceolatum,Sedum lanceolatum,Forb,5,34,T08.2,a little past prime,,May-Sept
+7/25/2020,JMD,T08,Treated,A5,UnkGoldenweed,ASTERACEAE,Ambrosia,tomentosa,Ambrosia tomentosa,Forb,0,2,No,almost flowering,Can probably cut,June-Sept
+7/25/2020,JMD,T08,Treated,A5,UnkShrubby aster,ASTERACEAE,Erigeron,spp.,Erigeron spp.,Forb,0,12,No,5 part seeding,,May-June
+7/25/2020,JMD,T08,Treated,B10,ASTRA,FABACEAE,Astragalus,spp.,Astragalus spp.,Shrub,0,2,No,,,April-Aug
+7/25/2020,JMD,T08,Treated,B10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,0,1,No,Almost open,,July-Oct
+7/25/2020,JMD,T08,Treated,B10,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,19,No,all seeds,,May-Sept
+7/25/2020,JMD,T08,Treated,B10,Unk SPAT,UNK,Unk,Unk24,Unk Unk24,Shrub,0,4,No,"1 bir-based roset 35 seeds. Basal spatulated leaves, only seed head, left Erioginum? Collected from plot",Could not find collection. Hard to tell from photo,0
+7/25/2020,JMD,T08,Treated,B5,ERCA14,BRASSICACEAE,Erysimum,capitatum,Erysimum capitatum,Forb,0,1,T08.6,Collected rest of plant from plot,Probably Erysimum capitatum,May-June
+7/25/2020,JMD,T08,Treated,B5,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,9,30,T08.5,,,July-Oct
+7/25/2020,JMD,T08,Treated,B5,LOMAT,APIACEAE,Lomatium,spp.,Lomatium spp.,Forb,0,1,No,,,May-June
+7/25/2020,JMD,T08,Treated,B5,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,1,No,,,May-Sept
+7/25/2020,JMD,T08,Treated,B5,POTEN,ROSACEAE,Potentilla,spp.,Potentilla spp.,Forb,0,1,No,,,May-June
+7/25/2020,JMD,T08,Treated,B5,STLA,CRASSULACEAE,Sedum,lanceolatum,Sedum lanceolatum,Forb,0,3,No,3 seed heads (10F/head). Stonecrop -,,May-Sept
+7/25/2020,JMD,T08,Treated,C10,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,0,3,No,just leaves,,June-Oct
+7/25/2020,JMD,T08,Treated,C10,ASTRA,FABACEAE,Astragalus,spp.,Astragalus spp.,Shrub,0,2,No,seeding,,April-Aug
+7/25/2020,JMD,T08,Treated,C10,LOMAT,APIACEAE,Lomatium,spp.,Lomatium spp.,Forb,0,1,No,,,May-June
+7/25/2020,JMD,T08,Treated,C10,PENST,PLANTAGINACEAE,Penstemon,spp.,Penstemon spp.,Forb,0,35,No,,,May-Sept
+7/25/2020,JMD,T08,Treated,C10,Unk SPAT,UNK,Unk,Unk24,Unk Unk24,Shrub,0,2,No,"2 seed heads. Basal spatulated leaves, only seed head, left Erioginum? Collected from plot",Could not find collection. Hard to tell from photo,0
+7/25/2020,JMD,T08,Treated,C10,UnkShrubby aster,ASTERACEAE,Erigeron,spp.,Erigeron spp.,Forb,0,16,No,8 seed heads,,May-June
+7/25/2020,JMD,T08,Treated,C5,NA,NA,NA,NA,NA,NA,NA,NA,NA,,,0
+7/25/2020,JMD,T08,Treated,D10,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,0,5,No,too small,,June-Oct
+7/25/2020,JMD,T08,Treated,D10,GEVI2,GERANIACEAE,Geranium,viscosissimum,Geranium viscosissimum,Forb,0,1,No,too small,,June-Aug
+7/25/2020,JMD,T08,Treated,D5,NA,NA,NA,NA,NA,NA,NA,NA,NA,,,0
+8/1/2020,JMD,T98,Treated,A10,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,12,No,,,Aug-Oct
+8/1/2020,JMD,T98,Treated,A10,CAPA10,CAMPANULACEAE,Campanula,parryi,Campanula parryi,Forb,0,9,No,,,June-Aug
+8/1/2020,JMD,T98,Treated,A10,GERAN,GERANIACEAE,Geranium,spp.,Geranium spp.,Forb,0,3,No,,,May-Sept
+8/1/2020,JMD,T98,Treated,A10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,2,26,T98.2,,,July-Oct
+8/1/2020,JMD,T98,Treated,A10,LOMAT,APIACEAE,Lomatium,spp.,Lomatium spp.,Forb,0,1,No,,,May-June
+8/1/2020,JMD,T98,Treated,A10,MELA3,BORAGINACEAE,Mertensia,Lanceolata,Mertensia Lanceolata,Forb,0,1,No,an old flower henels. Changed from CITR to CANU4,Changed from UnkClasp to MELA3,May-June
+8/1/2020,JMD,T98,Treated,A10,TRPE21,ASTERACEAE,Tripleurospermum,inodorum,Tripleurospermum inodorum,Forb,1,3,T98.3,,"Entered as ""Shrubby"" but datasheets say""Shrubby Bed."" Changed to TRPE21",July-Sept
+8/1/2020,JMD,T98,Treated,A5,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,3,No,,,Aug-Oct
+8/1/2020,JMD,T98,Treated,A5,ARUV,ERICACEAE,Arctostaphylos,uva-ursi,Arctostaphylos uva-ursi,Shrub,0,29,No,,,May-June
+8/1/2020,JMD,T98,Treated,A5,CEFE,RHAMNACEAE,Ceanothus,fendleri,Ceanothus fendleri,Shrub,0,63,No,,,May-June
+8/1/2020,JMD,T98,Treated,A5,UnkTiny B,BRASSICACEAE,Lepidium,spp.,Lepidium spp.,Forb,0,1,No,,"Could not find collection. Notes from H18: tiny brassica. Def collected before, just can't remember what I called it. Xmas tree arrangement of seed. Collected again. ",May-June
+8/1/2020,JMD,T98,Treated,B10,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,0,15,No,,,June-Oct
+8/1/2020,JMD,T98,Treated,B10,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,2,No,,,Aug-Oct
+8/1/2020,JMD,T98,Treated,B10,CAPA10,CAMPANULACEAE,Campanula,parryi,Campanula parryi,Forb,0,1,No,,,June-Aug
+8/1/2020,JMD,T98,Treated,B10,GRIND,ASTERACEAE,Grindelia,squarrosa,Grindelia squarrosa,Forb,0,2,No,Was Gumweed. Changed to GRIND,,June-Oct
+8/1/2020,JMD,T98,Treated,B10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,2,13,T98.13,,,July-Oct
+8/1/2020,JMD,T98,Treated,B10,LUPIN,FABACEAE,Lupinus,spp.,Lupinus spp.,Forb,0,4,No,~15 seed beds,,April-Sept
+8/1/2020,JMD,T98,Treated,B10,TRPE21,ASTERACEAE,Tripleurospermum,inodorum,Tripleurospermum inodorum,Forb,0,4,No,,"Entered as ""Shrubby"" but datasheets say""Shrubby Bed."" Changed to TRPE21",July-Sept
+8/1/2020,JMD,T98,Treated,B5,AMPS,ASTERACEAE,Ambrosia,psilostachya,Ambrosia psilostachya,Forb,0,6,No,,Changed from UnkF to AMPS,July-Sept
+8/1/2020,JMD,T98,Treated,B5,GRIND,ASTERACEAE,Grindelia,squarrosa,Grindelia squarrosa,Forb,0,1,No,Was Gumweed. Changed to GRIND,,June-Oct
+8/1/2020,JMD,T98,Treated,B5,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,1,16,No,,,July-Oct
+8/1/2020,JMD,T98,Treated,B5,POTEN,ROSACEAE,Potentilla,spp.,Potentilla spp.,Forb,0,4,No,,,May-June
+8/1/2020,JMD,T98,Treated,B5,TRPE21,ASTERACEAE,Tripleurospermum,inodorum,Tripleurospermum inodorum,Forb,0,25,No,Not yet,"Entered as ""Shrubby"" but datasheets say""Shrubby Bed."" Changed to TRPE21",July-Sept
+8/1/2020,JMD,T98,Treated,B5,UnkPINK,UNK,Unk,Unk61,Unk Unk61,Forb,30,2,T98.11,,Flowering when collected (8/1/20). Can probably cut,Just leaves
+8/1/2020,JMD,T98,Treated,C10,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,6,No,,,Aug-Oct
+8/1/2020,JMD,T98,Treated,C10,ARFR,ASTERACEAE,Artemisia,absinthium,Artemisia absinthium,Forb,0,1,No,,,July-Oct
+8/1/2020,JMD,T98,Treated,C10,CAPA10,CAMPANULACEAE,Campanula,parryi,Campanula parryi,Forb,6,13,T98.4,,,June-Aug
+8/1/2020,JMD,T98,Treated,C10,ERIOG,POLYGONACEAE,Eriogonum,spp.,Eriogonum spp.,Shrub,0,5,No,"Was ERCO, change to ERIOG",,May-June
+8/1/2020,JMD,T98,Treated,C10,GRIND,ASTERACEAE,Grindelia,squarrosa,Grindelia squarrosa,Forb,0,3,No,Was Gumweed. Changed to GRIND,,June-Oct
+8/1/2020,JMD,T98,Treated,C10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,2,2,T98.5,,,July-Oct
+8/1/2020,JMD,T98,Treated,C10,TRAGO,ASTERACEAE,Tragopogon,spp.,Tragopogon spp.,Forb,0,2,No,"Was TRAG, Changed to TRAGO for now",,May-Sept
+8/1/2020,JMD,T98,Treated,C10,TRPE21,ASTERACEAE,Tripleurospermum,inodorum,Tripleurospermum inodorum,Forb,0,4,No,not yet bloomed,"Entered as ""Shrubby"" but datasheets say""Shrubby Bed."" Changed to TRPE21",July-Sept
+8/1/2020,JMD,T98,Treated,C10,UnkPINK,UNK,Unk,Unk61,Unk Unk61,Forb,0,2,No, browsed,Flowering when collected (8/1/20). Can probably cut,Just leaves
+8/1/2020,JMD,T98,Treated,C10,UnkTiny B,BRASSICACEAE,Lepidium,spp.,Lepidium spp.,Forb,0,3,No,seeds,,May-June
+8/1/2020,JMD,T98,Treated,C5,ARFR,ASTERACEAE,Artemisia,absinthium,Artemisia absinthium,Forb,0,6,No,,,July-Oct
+8/1/2020,JMD,T98,Treated,C5,ARUV,ERICACEAE,Arctostaphylos,uva-ursi,Arctostaphylos uva-ursi,Shrub,0,5,No,,,May-June
+8/1/2020,JMD,T98,Treated,D10,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,0,11,No,,,June-Oct
+8/1/2020,JMD,T98,Treated,D10,ALLIU,LILIACEAE,Allium,spp.,Allium spp.,Forb,0,1,No,,,May-June
+8/1/2020,JMD,T98,Treated,D10,AMPS,ASTERACEAE,Ambrosia,psilostachya,Ambrosia psilostachya,Forb,0,44,No,,Changed from UnkF to AMPS,July-Sept
+8/1/2020,JMD,T98,Treated,D10,COPA3,SCROPHULARIACEAE,Collinsia,parviflora,Collinsia parviflora,Forb,2,1,T98.20,COPA3? From H15,,May-June
+8/1/2020,JMD,T98,Treated,D10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,1,7,No,,,July-Oct
+8/1/2020,JMD,T98,Treated,D10,POTEN,ROSACEAE,Potentilla,spp.,Potentilla spp.,Forb,0,10,No,,,May-June
+8/1/2020,JMD,T98,Treated,D10,TAOF,ASTERACEAE,Taraxacum,officinale,Taraxacum officinale,Forb,0,5,No,Was TAOG. Changed to TAOF (?),,May-June
+8/1/2020,JMD,T98,Treated,D10,TRPE21,ASTERACEAE,Tripleurospermum,inodorum,Tripleurospermum inodorum,Forb,0,4,No,,"Entered as ""Shrubby"" but datasheets say""Shrubby Bed."" Changed to TRPE21",July-Sept
+8/1/2020,JMD,T98,Treated,D10,UnkPINK,UNK,Unk,Unk61,Unk Unk61,Forb,0,1,No,,Flowering when collected (8/1/20). Can probably cut,Just leaves
+8/1/2020,JMD,T98,Treated,D5,ACMI2,ASTERACEAE,Achillea,millefolium,Achillea millefolium,Forb,0,2,No,,,June-Oct
+8/1/2020,JMD,T98,Treated,D5,AMPS,ASTERACEAE,Ambrosia,psilostachya,Ambrosia psilostachya,Forb,0,79,No,still buds,Changed from UnkF to AMPS,July-Sept
+8/1/2020,JMD,T98,Treated,D5,ERIOG,POLYGONACEAE,Eriogonum,spp.,Eriogonum spp.,Shrub,0,4,No,"Was ERCO, change to ERIOG",,May-June
+8/1/2020,JMD,T98,Treated,D5,LASE,ASTERACEAE,Lactuca,serriola,Lactuca serriola,Forb,0,2,No,,Changed from UnkMILK to LASE,June-Oct
+8/1/2020,JMD,T98,Treated,D5,LUPIN,FABACEAE,Lupinus,spp.,Lupinus spp.,Forb,13,9,T98.16,,,April-Sept
+8/1/2020,JMD,T98,Treated,D5,POTEN,ROSACEAE,Potentilla,spp.,Potentilla spp.,Forb,0,5,No,,,May-June
+8/1/2020,JMD,T98,Treated,D5,ROSA,ROSACEAE,Rosa,acicularis,Rosa acicularis,Shrub,0,1,No,too small,,June-Aug
+8/1/2020,JMD,T98,Treated,D5,TAOF,ASTERACEAE,Taraxacum,officinale,Taraxacum officinale,Forb,0,12,No,n16 about to bloom. Was TAOG. Changed to TAOF (?),,May-June
+8/1/2020,JMD,T98,Treated,D5,Unkbedstraw,POLEMONIACEAE,Phlox,multiflora,Phlox multiflora,Forb,0,21,No,~5 part(past?) flowers,,April-July
+8/1/2020,JMD,T99,Treated,A10,ARFR,ASTERACEAE,Artemisia,absinthium,Artemisia absinthium,Forb,0,19,No,,,July-Oct
+8/1/2020,JMD,T99,Treated,A10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,0,1,No,,,July-Oct
+8/1/2020,JMD,T99,Treated,A5,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,20,No,,,Aug-Oct
+8/1/2020,JMD,T99,Treated,A5,ERIGE2,ASTERACEAE,Erigeron,spp.,Erigeron spp.,Forb,0,3,No,3 past flowers,Changed from UnkASTER to ERIGE2,May-June
+8/1/2020,JMD,T99,Treated,A5,ERIOG,POLYGONACEAE,Eriogonum,spp.,Eriogonum spp.,Shrub,0,5,No,"too small. Was ERCO, change to ERIOG",,May-June
+8/1/2020,JMD,T99,Treated,A5,GALIU,RUBIACEAE,Galium,spp.,Galium spp.,Forb,0,17,No,"Was GALLI, changed to GALIU",,May-Aug
+8/1/2020,JMD,T99,Treated,A5,UnkTiny B,BRASSICACEAE,Lepidium,spp.,Lepidium spp.,Forb,0,7,No,,,May-June
+8/1/2020,JMD,T99,Treated,B10,NA,NA,NA,NA,NA,NA,NA,NA,NA,,,0
+8/1/2020,JMD,T99,Treated,B5,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,1,4,T99.2,,,July-Oct
+8/1/2020,JMD,T99,Treated,B5,MELA3,BORAGINACEAE,Mertensia,Lanceolata,Mertensia Lanceolata,Forb,0,3,No,10 old flower heads,Changed from CLASP to MELA3,May-June
+8/1/2020,JMD,T99,Treated,B5,UnkSimple leaf,UNK,Unk,Unk72,Unk Unk72,Forb,0,2,No,,Can probably cut,Just leaves
+8/1/2020,JMD,T99,Treated,C10,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,4,No,,,Aug-Oct
+8/1/2020,JMD,T99,Treated,C10,ERIGE2,ASTERACEAE,Erigeron,spp.,Erigeron spp.,Forb,0,2,No,,Changed from UnkASTER to ERIGE2,May-June
+8/1/2020,JMD,T99,Treated,C10,GALIU,RUBIACEAE,Galium,spp.,Galium spp.,Forb,0,10,No,Was  GALLIU changed to GALIU,,May-Aug
+8/1/2020,JMD,T99,Treated,C10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,1,56,T99.1,,,July-Oct
+8/1/2020,JMD,T99,Treated,C10,PHACE,HYDROPHYLLACEAE,Phacelia,spp.,Phacelia spp.,Forb,0,3,No,seeding,,May-Aug
+8/1/2020,JMD,T99,Treated,C5,NA,NA,NA,NA,NA,NA,NA,NA,NA,,,0
+8/1/2020,JMD,T99,Treated,D10,ARAR,ASTERACEAE,Artemisia,biennis,Artemisia biennis,Forb,0,1,No,,,Aug-Oct
+8/1/2020,JMD,T99,Treated,D10,ERIOG,POLYGONACEAE,Eriogonum,spp.,Eriogonum spp.,Shrub,0,6,No,"Was ERCO, change to ERIOG",,May-June
+8/1/2020,JMD,T99,Treated,D10,GALIU,RUBIACEAE,Galium,spp.,Galium spp.,Forb,0,1,No,"Was GALLI, changed to GALIU",,May-Aug
+8/1/2020,JMD,T99,Treated,D10,HEPU14,ASTERACEAE,Heterotheca,pumila,Heterotheca pumila,Forb,0,20,No,seeding,,July-Oct
+8/1/2020,JMD,T99,Treated,D10,OPUNT,CACTACEAE,Opuntia,spp.,Opuntia spp.,Shrub,0,4,No,,,May-Aug
+8/1/2020,JMD,T99,Treated,D5,PHACE,HYDROPHYLLACEAE,Phacelia,spp.,Phacelia spp.,Forb,0,3,No,~25 seeds,"looks like an arrow pointing to row above, but not sure?",May-Aug
+8/1/2020,JMD,T99,Treated,D5,YUGL,AGAVACEAE,Yucca,glauca,Yucca glauca,Shrub,0,1,No,,,May-July
